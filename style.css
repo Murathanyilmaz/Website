@@ -12,13 +12,13 @@ body {
 .navigation {
     vertical-align: middle;
     text-align: center;
-    font-family: Poppins, Geneva, Verdana, sans-serif;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
     margin-top: 20px;
 }
 
 .description {
     text-align: center;
-    font-family: Poppins, Geneva, Verdana, sans-serif;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
     padding-top: 2px;
 }
 
@@ -68,14 +68,9 @@ body {
     display: block;
 }
 
-.portfolio {
-    text-align: center;
-    font-family: Poppins, Geneva, Verdana, sans-serif;
-}
-
 .unity {
     text-align: center;
-    font-family: Poppins, Geneva, Verdana, sans-serif;
+    font-family: Nunito, Geneva, Verdana, sans-serif;
 }
 
 #fullpage {
