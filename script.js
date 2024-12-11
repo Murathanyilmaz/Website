@@ -1,5 +1,6 @@
 "use strict"
 const portfolioButton = document.getElementById("portfolioButton");
+const lensesButton = document.getElementById("lensesButton");
 const unityButton = document.getElementById("unityButton");
 const jumbleButton = document.getElementById("jumbleButton");
 const diceButton = document.getElementById("diceButton");
@@ -8,6 +9,17 @@ const memoryGameButton = document.getElementById("memoryGameButton");
 
 portfolioButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.remove("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
+    document.querySelector(".unity").classList.add("hidden");
+    document.querySelector(".jumble-game").classList.add("hidden");
+    document.querySelector(".pig-game").classList.add("hidden");
+    document.querySelector(".pig-game-desc").classList.add("hidden");
+    document.querySelector(".guess-game").classList.add("hidden");
+    document.querySelector(".memorygame").classList.add("hidden");
+})
+lensesButton.addEventListener("click", () => {
+    document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.remove("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -17,6 +29,7 @@ portfolioButton.addEventListener("click", () => {
 })
 unityButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
     document.querySelector(".unity").classList.remove("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -26,6 +39,7 @@ unityButton.addEventListener("click", () => {
 })
 jumbleButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.remove("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -35,6 +49,7 @@ jumbleButton.addEventListener("click", () => {
 })
 diceButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.remove("hidden");
@@ -44,6 +59,7 @@ diceButton.addEventListener("click", () => {
 })
 guessButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -53,6 +69,7 @@ guessButton.addEventListener("click", () => {
 })
 memoryGameButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
+    document.querySelector(".lenses").classList.add("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -69,5 +86,5 @@ function dropDownFunction() {
 function dropDownFunction2() {
     document.getElementById("myDropdown").classList.remove("show");
     document.getElementById("arrow").classList.add("fa-caret-down");
-    document.getElementById("arrow").classList.remove("fa-caret-up");  
+    document.getElementById("arrow").classList.remove("fa-caret-up");
 }

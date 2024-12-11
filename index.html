@@ -11,19 +11,22 @@
     <link href="jumble.css" rel="stylesheet" />
     <link href="guess.css" rel="stylesheet" />
     <link href="memorygame.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
 </head>
 
 <body>
     <div class="navigation">
         <div class="icon">
-            <img width=120px src="img/sitelogo.png"/>
+            <img width=120px src="img/sitelogo.png" />
         </div>
         <div>
+            <p class="nav_button" id="lensesButton" onclick="dropDownFunction2()">Lenses</p>
+            <span class="seperator">|</span>
             <p class="nav_button" id="unityButton" onclick="dropDownFunction2()">Unity</p>
             <span class="seperator">|</span>
-            <p class="nav_button" id="javasScriptButton" onclick="dropDownFunction()">JavaScript <i id="arrow" class="fa fa-caret-down"></i></p>
+            <p class="nav_button" id="javasScriptButton" onclick="dropDownFunction()">JavaScript <i id="arrow"
+                    class="fa fa-caret-down"></i></p>
             <span class="seperator">|</span>
             <p class="nav_button" id="portfolioButton" onclick="dropDownFunction2()">2D/3D</p>
             <div class="dropdown-content" id="myDropdown">
@@ -185,7 +188,8 @@
         </div>
         <div class="portfolio hidden">
             <div class="description">
-                <h4>3D models are created with <font color="#dd6e13">Blender.</font></h4>
+                <h4>3D models are created with <font color="#dd6e13">Blender.</font>
+                </h4>
             </div>
             <div class="models">
                 <img width="20%" src="img/hobi1.png" />
@@ -276,9 +280,9 @@
         </div>
     </main>
     <footer>
-        <a href ="https://www.linkedin.com/in/murathanyilmaz/"><img width="25px" src="img/linkedin.png"/></a>
+        <a href="https://www.linkedin.com/in/murathanyilmaz/"><img width="25px" src="img/linkedin.png" /></a>
         <span>&nbsp;&nbsp;</span>
-        <a href ="mailto:murathanonuryilmaz@gmail.com"><img width="25px" src="img/gmail.png"/></a>
+        <a href="mailto:murathanonuryilmaz@gmail.com"><img width="25px" src="img/gmail.png" /></a>
     </footer>
     <script src="script.js"></script>
     <script src="library.js"></script>
@@ -287,4 +291,5 @@
     <script src="guess.js"></script>
     <script src="memorygame.js"></script>
 </body>
+
 </html>
