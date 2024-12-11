@@ -23,7 +23,8 @@ body {
 }
 
 .portfolio {
-    margin: auto;
+    text-align: center;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
 }
 
 .pig-game-desc {
