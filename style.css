@@ -105,3 +105,14 @@ footer {
     font-family: Arial;
     margin: 10px;
 }
+
+@media screen and (min-width:800px) {
+    video {
+        width: 100%;
+    }
+}
+@media screen and (min-width:1000px) {
+    video {
+        width: 15%;
+    }
+}
