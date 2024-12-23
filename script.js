@@ -19,9 +19,9 @@ portfolioButton.addEventListener("click", () => {
     document.querySelector(".memorygame").classList.add("hidden");
     document.querySelector(".gridpuzzle").classList.add("hidden");
 })
-lensesButton.addEventListener("click", () => {
+/*lensesButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
-    //document.querySelector(".lenses").classList.remove("hidden");
+    document.querySelector(".lenses").classList.remove("hidden");
     document.querySelector(".unity").classList.add("hidden");
     document.querySelector(".jumble-game").classList.add("hidden");
     document.querySelector(".pig-game").classList.add("hidden");
@@ -29,7 +29,7 @@ lensesButton.addEventListener("click", () => {
     document.querySelector(".guess-game").classList.add("hidden");
     document.querySelector(".memorygame").classList.add("hidden");
     document.querySelector(".gridpuzzle").classList.add("hidden");
-})
+})*/
 unityButton.addEventListener("click", () => {
     document.querySelector(".portfolio").classList.add("hidden");
     //document.querySelector(".lenses").classList.add("hidden");
