@@ -44,7 +44,7 @@ body {
 
 .nav_button {
     display: inline-block;
-    color: #000000;
+    color: #ffffff;
     font-size: 14pt;
     font-weight: bold;
     cursor: pointer;
@@ -106,4 +106,5 @@ footer {
     margin: 10px;
 
 }
+
 
