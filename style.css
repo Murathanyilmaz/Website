@@ -20,6 +20,7 @@ body {
     text-align: center;
     font-family: 'Nunito', Geneva, Verdana, sans-serif;
     padding-top: 2px;
+    color: white;
 }
 
 .portfolio {
@@ -106,5 +107,3 @@ footer {
     margin: 10px;
 
 }
-
-
