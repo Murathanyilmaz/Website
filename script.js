@@ -39,6 +39,16 @@ function show(section) {
         const el = document.querySelector("." + name);
         el.classList.toggle("hidden", name !== section)
     });
+    if (section == "aboutme") {
+        document.querySelector('.aboutme').classList.add('visible');
+        const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
+        paragraphs.forEach((p, index) => {
+            p.classList.remove('show');
+            setTimeout(() => {
+                p.classList.add('show');
+            }, index * 500);
+        });
+    }
 }
 
 lensesButton.onclick = () => show("lenses");
@@ -50,3 +60,38 @@ diceButton.onclick = () => show("pig-game");
 guessButton.onclick = () => show("guess-game");
 memoryGameButton.onclick = () => show("memorygame");
 gridPuzzleButton.onclick = () => show("gridpuzzle");
+
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-img');
+const closeBtn = document.querySelector('.lightbox .close');
+
+document.querySelectorAll('.portfolio img').forEach(img => {
+    img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.remove('hidden');
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.classList.add('hidden');
+});
+
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.add('hidden');
+    }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const aboutEl = document.querySelector('.aboutme');
+    const paragraphs = aboutEl.querySelectorAll('p');
+    aboutEl.classList.add('visible');
+    setTimeout(() => {
+        paragraphs.forEach((p, index) => {
+            setTimeout(() => {
+                p.classList.add('show');
+            }, index * 500);
+        });
+    }, 100);
+});
