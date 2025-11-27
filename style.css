@@ -6,14 +6,26 @@
 }
 
 body {
-    background-color: #4a4948;
+    background: linear-gradient(180deg, #4a4948 0%, #252524 100%);
+}
+
+body,
+html,
+main {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.icon {
+    text-align: center;
+    margin-top: 30px;
 }
 
 .navigation {
     vertical-align: middle;
     text-align: center;
     font-family: 'Nunito', Geneva, Verdana, sans-serif;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .description {
@@ -76,9 +88,13 @@ body {
     display: block;
 }
 
-.navigation p:hover {
+.navigation a:hover {
     text-decoration: overline;
     color: #dd6e13;
+}
+
+.navigation a {
+    text-decoration: none;
 }
 
 .hidden {
@@ -176,4 +192,8 @@ footer {
     font-size: 3rem;
     color: #fff;
     cursor: pointer;
+}
+
+html {
+    scroll-behavior: smooth;
 }

@@ -9,6 +9,7 @@ const diceButton = document.getElementById("diceButton");
 const guessButton = document.getElementById("guessButton");
 const memoryGameButton = document.getElementById("memoryGameButton");
 const gridPuzzleButton = document.getElementById("gridPuzzleButton");
+let lastSection;
 
 function dropDownFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -33,13 +34,12 @@ const sections = [
     "memorygame",
     "gridpuzzle",
 ];
-
 function show(section) {
     sections.forEach(name => {
         const el = document.querySelector("." + name);
         el.classList.toggle("hidden", name !== section)
     });
-    if (section == "aboutme") {
+    if (section == "aboutme" && lastSection != "aboutme") {
         document.querySelector('.aboutme').classList.add('visible');
         const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
         paragraphs.forEach((p, index) => {
@@ -49,6 +49,7 @@ function show(section) {
             }, index * 500);
         });
     }
+    lastSection = section;
 }
 
 lensesButton.onclick = () => show("lenses");
@@ -60,7 +61,6 @@ diceButton.onclick = () => show("pig-game");
 guessButton.onclick = () => show("guess-game");
 memoryGameButton.onclick = () => show("memorygame");
 gridPuzzleButton.onclick = () => show("gridpuzzle");
-
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');
@@ -87,6 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const aboutEl = document.querySelector('.aboutme');
     const paragraphs = aboutEl.querySelectorAll('p');
     aboutEl.classList.add('visible');
+    lastSection = "aboutme";
     setTimeout(() => {
         paragraphs.forEach((p, index) => {
             setTimeout(() => {

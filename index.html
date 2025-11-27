@@ -16,30 +16,30 @@
 </head>
 
 <body>
-    <div class="navigation">
+    <header>
         <div class="icon">
-            <img width=120px src="img/sitelogo.png" />
+            <img width=120px src="img/sitelogo.png" alt="Murathan Yılmaz Website Logo" />
         </div>
-        <div>
-            <p class="nav_button" id="lensesButton" onclick="dropDownFunction2()">Snapchat</p>
+        <nav class="navigation">
+            <a href="#lenses" class="nav_button" id="lensesButton" onclick="dropDownFunction2()">Snapchat</a>
             <span class="seperator">|</span>
-            <p class="nav_button" id="unityButton" onclick="dropDownFunction2()">Unity</p>
+            <a href="#unity" class="nav_button" id="unityButton" onclick="dropDownFunction2()">Unity</a>
             <span class="seperator">|</span>
-            <p class="nav_button" id="javasScriptButton" onclick="dropDownFunction()">JavaScript <i id="arrow"
-                    class="fa fa-caret-down"></i></p>
+            <a href="#jumble-game" class="nav_button" id="javasScriptButton" onclick="dropDownFunction()">JavaScript <i
+                    id="arrow" class="fa fa-caret-down"></i></a>
             <span class="seperator">|</span>
-            <p class="nav_button" id="portfolioButton" onclick="dropDownFunction2()">2D/3D</p>
+            <a href="#portfolio" class="nav_button" id="portfolioButton" onclick="dropDownFunction2()">2D/3D</a>
             <span class="seperator">|</span>
-            <p class="nav_button" id="aboutmeButton" onclick="dropDownFunction2()">About Me</p>
+            <a href="#aboutme" class="nav_button" id="aboutmeButton" onclick="dropDownFunction2()">About Me</a>
             <div class="dropdown-content" id="myDropdown">
-                <p class="nav_button" id="jumbleButton">Jumble</p>
-                <p class="nav_button" id="diceButton">Dice Game</p>
-                <p class="nav_button" id="guessButton">Guess My Number</p>
-                <p class="nav_button" id="memoryGameButton">Memory Game</p>
-                <p class="nav_button" id="gridPuzzleButton">Grid Puzzle</p>
+                <a href="#jumble-game" class="nav_button" id="jumbleButton">Jumble</a>
+                <a href="#pig-game" class="nav_button" id="diceButton">Dice Game</a>
+                <a href="#guess-game" class="nav_button" id="guessButton">Guess My Number</a>
+                <a href="#memorygame" class="nav_button" id="memoryGameButton">Memory Game</a>
+                <a href="#gridpuzzle" class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
             </div>
-        </div>
-    </div>
+        </nav>
+    </header>
     <main class="content">
         <div class="lenses hidden">
             <h3>
@@ -341,6 +341,15 @@
                 <p>
                     I’m always looking for opportunities to grow, take on challenging projects,
                     and turn ideas into memorable experiences that players enjoy.
+                    <br>
+                </p>
+                <p>
+                    <a href="https://www.linkedin.com/in/murathanyilmaz/"><img width="35px"
+                            src="img/linkedin.png" /></a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <a href="https://github.com/Murathanyilmaz"><img width="35px" src="img/github.png" /></a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <a href="mailto:murathanonuryilmaz@gmail.com"><img width="35ps" src="img/gmail.png" /></a>
                 </p>
             </div>
         </div>
@@ -349,10 +358,6 @@
         <span class="close">&times;</span>
         <img class="lightbox-img" src="" alt="Portfolio Image">
     </div>
-    <footer>
-        <a href="https://www.linkedin.com/in/murathanyilmaz/"><img width="25px" src="img/linkedin.png" /></a>
-        <span>&nbsp;&nbsp;</span>
-        <a href="mailto:murathanonuryilmaz@gmail.com"><img width="25px" src="img/gmail.png" /></a>
     </footer>
     <script src="script.js"></script>
     <script src="library.js"></script>
