@@ -8,7 +8,9 @@
 body {
     background: linear-gradient(180deg, #4a4948 0%, #252524 100%);
 }
-
+html {
+    background-color: #f15924;
+}
 body,
 html,
 main {
@@ -18,14 +20,14 @@ main {
 
 .icon {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 .navigation {
     vertical-align: middle;
     text-align: center;
     font-family: 'Nunito', Geneva, Verdana, sans-serif;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .description {
@@ -49,12 +51,12 @@ main {
     transform: scale(1.05);
 }
 
-.lenses {
+.snapchat {
     text-align: center;
     font-family: 'Nunito', Geneva, Verdana, sans-serif;
 }
 
-.pig-game-desc {
+.diceCounterDesc {
     text-align: center;
     border-radius: 9px;
     font-size: 14pt;
@@ -73,7 +75,7 @@ main {
     margin: 5px 20px 5px 20px;
 }
 
-.seperator {
+.separator {
     display: inline-block;
     font-size: 20px;
     margin: 15px 10 15px 10px;
@@ -90,7 +92,7 @@ main {
 
 .navigation a:hover {
     text-decoration: overline;
-    color: #dd6e13;
+    color: #f15924;
 }
 
 .navigation a {
@@ -110,20 +112,6 @@ main {
 .unity {
     text-align: center;
     font-family: Nunito, Geneva, Verdana, sans-serif;
-}
-
-#fullpage {
-    display: none;
-    position: absolute;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: contain;
-    background-repeat: no-repeat no-repeat;
-    background-position: center center;
-    background-color: black;
 }
 
 footer {

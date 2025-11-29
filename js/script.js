@@ -1,45 +1,62 @@
 "use strict"
 
-const portfolioButton = document.getElementById("portfolioButton");
-const lensesButton = document.getElementById("lensesButton");
+const snapchatButton = document.getElementById("snapchatButton");
 const unityButton = document.getElementById("unityButton");
+const javascriptButton = document.getElementById("javasScriptButton");
+const portfolioButton = document.getElementById("portfolioButton");
 const aboutmeButton = document.getElementById("aboutmeButton")
-const jumbleButton = document.getElementById("jumbleButton");
-const diceButton = document.getElementById("diceButton");
-const guessButton = document.getElementById("guessButton");
-const memoryGameButton = document.getElementById("memoryGameButton");
+const wordJumbleButton = document.getElementById("wordJumbleButton");
+const diceCounterButton = document.getElementById("diceCounterButton");
+const guessNumberButton = document.getElementById("guessNumberButton");
+const memoryCardsButton = document.getElementById("memoryCardsButton");
 const gridPuzzleButton = document.getElementById("gridPuzzleButton");
+
 let lastSection;
 
 function dropDownFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("jsDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("fa-caret-down");
     document.getElementById("arrow").classList.toggle("fa-caret-up");
 }
 function dropDownFunction2() {
-    document.getElementById("myDropdown").classList.remove("show");
+    document.getElementById("jsDropdown").classList.toggle("show", false);
     document.getElementById("arrow").classList.add("fa-caret-down");
     document.getElementById("arrow").classList.remove("fa-caret-up");
 }
 
 const sections = [
-    "lenses",
+    "snapchat",
     "unity",
+    "javascript",
     "portfolio",
     "aboutme",
-    "jumble-game",
-    "pig-game",
-    "pig-game-desc",
-    "guess-game",
-    "memorygame",
-    "gridpuzzle",
+    "wordJumble",
+    "guessNumber",
+    "memoryCards",
+    "diceCounter",
+    "diceCounterDesc",
+    "gridPuzzle"
 ];
+
 function show(section) {
+    console.log(section);
+    if (section == "javascript") {
+        dropDownFunction();
+        section = "wordJumble";
+    }
+    if (lastSection == section) return;
+    if (section != "wordJumble" &&
+        section != "diceCounter" &&
+        section != "guessNumber" &&
+        section != "memoryCards" &&
+        section != "gridPuzzle") {
+        dropDownFunction2();
+    }
     sections.forEach(name => {
         const el = document.querySelector("." + name);
         el.classList.toggle("hidden", name !== section)
     });
-    if (section == "aboutme" && lastSection != "aboutme") {
+    if (section == "aboutme") {
         document.querySelector('.aboutme').classList.add('visible');
         const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
         paragraphs.forEach((p, index) => {
@@ -52,15 +69,16 @@ function show(section) {
     lastSection = section;
 }
 
-lensesButton.onclick = () => show("lenses");
+snapchatButton.onclick = () => show("snapchat");
 unityButton.onclick = () => show("unity");
+javascriptButton.onclick = () => show("javascript");
 portfolioButton.onclick = () => show("portfolio");
 aboutmeButton.onclick = () => show("aboutme");
-jumbleButton.onclick = () => show("jumble-game");
-diceButton.onclick = () => show("pig-game");
-guessButton.onclick = () => show("guess-game");
-memoryGameButton.onclick = () => show("memorygame");
-gridPuzzleButton.onclick = () => show("gridpuzzle");
+wordJumbleButton.onclick = () => show("wordJumble");
+diceCounterButton.onclick = () => show("diceCounter");
+guessNumberButton.onclick = () => show("guessNumber");
+memoryCardsButton.onclick = () => show("memoryCards");
+gridPuzzleButton.onclick = () => show("gridPuzzle");
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');

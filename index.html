@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Murathan Yılmaz</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="piggame.css" rel="stylesheet" />
-    <link href="jumble.css" rel="stylesheet" />
-    <link href="guess.css" rel="stylesheet" />
-    <link href="memorygame.css" rel="stylesheet" />
+    
+    <link href="css/diceCounter.css" rel="stylesheet" />
+    <link href="css/wordJumble.css" rel="stylesheet" />
+    <link href="css/guessNumber.css" rel="stylesheet" />
+    <link href="css/memoryCards.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="img/icons/favicon.png">
 </head>
-
 <body>
     <header>
         <div class="icon">
-            <img width=120px src="img/sitelogo.png" alt="Murathan Yılmaz Website Logo" />
+            <img width=120px src="img/icons/favicon.png" alt="Murathan Yılmaz Website Logo" />
         </div>
         <nav class="navigation">
-            <a href="#lenses" class="nav_button" id="lensesButton" onclick="dropDownFunction2()">Snapchat</a>
-            <span class="seperator">|</span>
-            <a href="#unity" class="nav_button" id="unityButton" onclick="dropDownFunction2()">Unity</a>
-            <span class="seperator">|</span>
-            <a href="#jumble-game" class="nav_button" id="javasScriptButton" onclick="dropDownFunction()">JavaScript <i
+            <a href="#snapchat" class="nav_button" id="snapchatButton">Snapchat</a>
+            <span class="separator">|</span>
+            <a href="#unity" class="nav_button" id="unityButton">Unity</a>
+            <span class="separator">|</span>
+            <a href="#javascript" class="nav_button" id="javasScriptButton">JavaScript <i
                     id="arrow" class="fa fa-caret-down"></i></a>
-            <span class="seperator">|</span>
-            <a href="#portfolio" class="nav_button" id="portfolioButton" onclick="dropDownFunction2()">2D/3D</a>
-            <span class="seperator">|</span>
-            <a href="#aboutme" class="nav_button" id="aboutmeButton" onclick="dropDownFunction2()">About Me</a>
-            <div class="dropdown-content" id="myDropdown">
-                <a href="#jumble-game" class="nav_button" id="jumbleButton">Jumble</a>
-                <a href="#pig-game" class="nav_button" id="diceButton">Dice Game</a>
-                <a href="#guess-game" class="nav_button" id="guessButton">Guess My Number</a>
-                <a href="#memorygame" class="nav_button" id="memoryGameButton">Memory Game</a>
-                <a href="#gridpuzzle" class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
+            <span class="separator">|</span>
+            <a href="#portfolio" class="nav_button" id="portfolioButton">2D/3D</a>
+            <span class="separator">|</span>
+            <a href="#aboutme" class="nav_button" id="aboutmeButton">About Me</a>
+            <div class="dropdown-content" id="jsDropdown">
+                <a href="#wordJumble" class="nav_button" id="wordJumbleButton">Jumble</a>
+                <a href="#diceCounter" class="nav_button" id="diceCounterButton">Dice Game</a>
+                <a href="#guessNumber" class="nav_button" id="guessNumberButton">Guess My Number</a>
+                <a href="#memoryCards" class="nav_button" id="memoryCardsButton">Memory Game</a>
+                <a href="#gridPuzzle" class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
             </div>
         </nav>
     </header>
     <main class="content">
-        <div class="lenses hidden">
+        <div class="snapchat hidden">
             <h3>
                 <font color="#ffffff">Made with
-                    <font color="#e3e610">Lens Studio.</font>
+                    <font color="#f15924">Lens Studio</font>.
             </h3>
             <div>
-                <video width="15%" src="vid/MazeGame.mp4" controls></video>
-                <video width="15%" src="vid/NewYearMessage.mp4" controls></video>
-                <video width="15%" src="vid/WallJumper.mp4" controls></video>
-                <video width="15%" src="vid/GOAT_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/MazeGame.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/NewYearMessage.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/WallJumper.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/GOAT_Prev.mp4" controls></video>
             </div>
             <div>
-                <video width="15%" src="vid/OLG_Prev.mp4" controls></video>
-                <video width="15%" src="vid/PizzaHut_Prev.mp4" controls></video>
-                <video width="15%" src="vid/Manuka_Prev.mp4" controls></video>
-                <video width="15%" src="vid/PopTarts_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/OLG_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/PizzaHut_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/Manuka_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/PopTarts_Prev.mp4" controls></video>
             </div>
             <div>
-                <video width="15%" src="vid/Purina_Prev.mp4" controls></video>
-                <video width="15%" src="vid/BTS_Prev.mp4" controls></video>
-                <video width="15%" src="vid/Reddi_Prev.mp4" controls></video>
-                <video width="15%" src="vid/WaterGame_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/Purina_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/BTS_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/Reddi_Prev.mp4" controls></video>
+                <video width="15%" src="vid/snapLenses/WaterGame_Prev.mp4" controls></video>
             </div>
             <h3>
                 <br>
@@ -73,13 +72,14 @@
                 <br>
             </h3>
         </div>
-        <div class="pig-game-desc hidden">
+        <div class="javascript hidden"></div>
+        <div class="diceCounterDesc hidden">
             <h3>2-Player dice game created with JavaScript. Roll the dice and collect points and hold them in your
                 bucket.<br>
                 If you roll 1, it's your opponents turn. First player to reach 100 points wins!
             </h3>
         </div>
-        <div class="pig-game hidden">
+        <div class="diceCounter hidden">
             <section class="player player--0 player--active">
                 <h2 class="name" id="name--0">Player 1</h2>
                 <p class="score" id="score--0">0</p>
@@ -97,12 +97,12 @@
                 </div>
             </section>
 
-            <img src="img/dice-5.png" alt="Playing dice" class="dice" />
+            <img src="img/dice/dice-5.png" alt="Playing dice" class="dice" />
             <button class="btn btn--new">🔄</button>
             <button class="btn btn--roll">🎲</button>
             <button class="btn btn--hold">📥</button>
         </div>
-        <div class="jumble-game hidden">
+        <div class="wordJumble hidden">
             <div class="description">
                 <p style="text-align: center;font-size: 30px;margin:10px"><i>Jumble</i></p>
                 <h3>A Wordle-like game created with JavaScript.<br>
@@ -197,7 +197,7 @@
                 </div>
             </div>
         </div>
-        <div class="guess-game hidden">
+        <div class="guessNumber hidden">
             <div class="description">
                 <h3>Guess the number and check if you got that correct!</h3>
             </div>
@@ -223,48 +223,50 @@
         </div>
         <div class="portfolio hidden">
             <div class="description">
-                <h3>Made with <font color="#dd6e13">Blender.</font>
+                <h3>Made with <font color="#f15924">Blender</font>.
                 </h3>
             </div>
             <div class="models">
-                <img width="20%" loading="lazy" src="img/hobi1.png" />
-                <img width="20%" loading="lazy" src="img/hobi2.png" />
-                <img width="20%" loading="lazy" src="img/hobi6.png" />
-                <img width="20%" loading="lazy" src="img/hobi4.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/ashbringer.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/pyramid.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/chessBoard1.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/castle.png" />
             </div>
             <div class="models">
-                <img width="20%" loading="lazy" src="img/deniz1.png" />
-                <img width="20%" loading="lazy" src="img/deniz2.png" />
-                <img width="20%" loading="lazy" src="img/deniz3.png" />
-                <img width="20%" loading="lazy" src="img/deniz4.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/chessBoard2.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/chessBoard3.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/bowlingScene1.png" />
+                <img width="20%" loading="lazy" src="img/blenderRenders/bedroom.png" />
             </div>
             <div class="models">
-                <img width="20%" loading="lazy" src="img/deniz5.png" />
-                <img width="20%" loading="lazy" src="img/deniz6.png" />
-                <img width="20%" loading="lazy" src="img/deniz7.png" />
-                <img width="20%" loading="lazy" src="img/deniz8.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart1.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart2.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart3.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart4.png" />
             </div>
             <div class="models">
-                <img width="12%" loading="lazy" src="img/mobil1.jpg" />
-                <img width="12%" loading="lazy" src="img/mobil3.jpg" />
-                <img width="12%" loading="lazy" src="img/mobil4.jpg" />
-                <img width="12%" loading="lazy" src="img/mobil5.jpg" />
-                <img width="12%" loading="lazy" src="img/mobil6.jpg" />
-                <img width="12%" loading="lazy" src="img/mobil7.jpg" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart5.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart6.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart7.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart8.png" />
             </div>
             <div class="models">
-                <img width="12%" loading="lazy" src="img/mobil8.png" />
-                <img width="12%" loading="lazy" src="img/mobil9.png" />
-                <img width="12%" loading="lazy" src="img/mobil10.png" />
-                <img width="10%" loading="lazy" src="img/mobil12.png" />
+                <img width="20%" loading="lazy" src="img/shipParts/shipPart9.png" />
+            </div>
+            <div class="models">
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal1.jpg" />
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal2.jpg" />
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal3.jpg" />
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal4.jpg" />
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal5.jpg" />
+                <img width="12%" loading="lazy" src="img/birdJournal/birdJournal6.jpg" />
             </div>
             <div>
-                <video width="25%" src="vid/video2.mkv" controls></video>
-                <video width="25%" src="vid/video3.mp4" controls></video>
+                <video width="25%" src="vid/blenderRender/bowling.mkv" controls></video>
+                <video width="25%" src="vid/blenderRender/coin.mp4" controls></video>
             </div>
-            <div id="fullpage" onclick="this.style.display='none';"></div>
         </div>
-        <div class="memorygame hidden">
+        <div class="memoryCards hidden">
             <h2>
                 <font color="#ffffff">Match classes to win!</font>
             </h2>
@@ -303,7 +305,7 @@
                 </tr>
             </table>
         </div>
-        <div class="gridpuzzle hidden">
+        <div class="gridPuzzle hidden">
             <div class="description">
                 <h4>Coming soon.</font>
                 </h4>
@@ -312,15 +314,15 @@
         <div class="unity hidden">
             <div class="description">
                 <h3>
-                    <font color="#ffffff">Made with <font color="#dd6e13">Unity</font>
+                    <font color="#ffffff">Made with <font color="#f15924">Unity</font>.
                 </h3>
             </div>
             <div>
                 <h3>Shooter & Builder Game - Demo</h3>
-                <video width="50%" src="vid/TurretSurvival.mp4" controls></video>
+                <video width="50%" src="vid/unityDemos/TurretSurvival.mp4" controls></video>
                 <h3>Ring Controller Game - Demo</h3>
                 </font>
-                <video width="50%" src="vid/Ring.mp4" controls></video>
+                <video width="50%" src="vid/unityDemos/Ring.mp4" controls></video>
             </div>
         </div>
         <div class="aboutme">
@@ -345,11 +347,11 @@
                 </p>
                 <p>
                     <a href="https://www.linkedin.com/in/murathanyilmaz/"><img width="35px"
-                            src="img/linkedin.png" /></a>
+                            src="img/icons/linkedin.png" /></a>
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <a href="https://github.com/Murathanyilmaz"><img width="35px" src="img/github.png" /></a>
+                    <a href="https://github.com/Murathanyilmaz"><img width="35px" src="img/icons/github.png" /></a>
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <a href="mailto:murathanonuryilmaz@gmail.com"><img width="35ps" src="img/gmail.png" /></a>
+                    <a href="mailto:murathanonuryilmaz@gmail.com"><img width="35ps" src="img/icons/gmail.png" /></a>
                 </p>
             </div>
         </div>
@@ -359,14 +361,11 @@
         <img class="lightbox-img" src="" alt="Portfolio Image">
     </div>
     </footer>
-    <script src="script.js"></script>
-    <script src="library.js"></script>
-    <script src="jumble.js"></script>
-    <script src="piggame.js"></script>
-    <script src="guess.js"></script>
-    <script src="memorygame.js"></script>
-
+    <script src="js/script.js"></script>
+    <script src="js/wordJumbleLib.js"></script>
+    <script src="js/wordJumble.js"></script>
+    <script src="js/diceCounter.js"></script>
+    <script src="js/guessNumber.js"></script>
+    <script src="js/memoryCards.js"></script>
 </body>
-
-
 </html>
