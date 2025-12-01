@@ -10,6 +10,7 @@ const diceCounterButton = document.getElementById("diceCounterButton");
 const guessNumberButton = document.getElementById("guessNumberButton");
 const memoryCardsButton = document.getElementById("memoryCardsButton");
 const gridPuzzleButton = document.getElementById("gridPuzzleButton");
+const minesweeperButton = document.getElementById("minesweeperButton");
 
 let lastSection;
 
@@ -35,7 +36,8 @@ const sections = [
     "memoryCards",
     "diceCounter",
     "diceCounterDesc",
-    "gridPuzzle"
+    "gridPuzzle",
+    "minesweeper"
 ];
 
 function show(section) {
@@ -48,7 +50,8 @@ function show(section) {
         section != "diceCounter" &&
         section != "guessNumber" &&
         section != "memoryCards" &&
-        section != "gridPuzzle") {
+        section != "gridPuzzle" &&
+        section != "minesweeper") {
         dropDownFunction2();
     }
     sections.forEach(name => {
@@ -65,6 +68,9 @@ function show(section) {
             }, index * 500);
         });
     }
+    else if (section == "minesweeper") {
+        CreateMinefield();
+    }
     lastSection = section;
 }
 
@@ -78,6 +84,7 @@ diceCounterButton.onclick = () => show("diceCounter");
 guessNumberButton.onclick = () => show("guessNumber");
 memoryCardsButton.onclick = () => show("memoryCards");
 gridPuzzleButton.onclick = () => show("gridPuzzle");
+minesweeperButton.onclick = () => show("minesweeper");
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');

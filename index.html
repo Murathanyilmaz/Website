@@ -12,6 +12,7 @@
     <link href="css/guessNumber.css" rel="stylesheet" />
     <link href="css/memoryCards.css" rel="stylesheet" />
     <link href="css/gridPuzzle.css" rel="stylesheet" />
+    <link href="css/minesweeper.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="icon" href="img/icons/favicon.png">
@@ -35,9 +36,15 @@
             <a href="#aboutme" class="nav_button" id="aboutmeButton">About Me</a>
             <div class="dropdown-content" id="jsDropdown">
                 <a href="#gridPuzzle" class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
+                <span class="separator">|</span>
                 <a href="#memoryCards" class="nav_button" id="memoryCardsButton">Memory Game</a>
+                <span class="separator">|</span>
                 <a href="#wordJumble" class="nav_button" id="wordJumbleButton">Jumble</a>
+                <span class="separator">|</span>
+                <a href="#minesweeper" class="nav_button" id="minesweeperButton">Minesweeper</a>
+                <span class="separator">|</span>
                 <a href="#diceCounter" class="nav_button" id="diceCounterButton">Dice Game</a>
+                <span class="separator">|</span>
                 <a href="#guessNumber" class="nav_button" id="guessNumberButton">Guess My Number</a>
             </div>
         </nav>
@@ -55,14 +62,14 @@
                     poster="img/thumbnails/thumbnail2.png"></video>
                 <video width="15%" src="vid/snapLenses/WallJumper.mp4" controls preload="metadata"
                     poster="img/thumbnails/thumbnail3.png"></video>
-                <video width="15%" src="vid/snapLenses/GOAT_Prev.mp4" controls preload="metadata"
-                    poster="img/thumbnails/thumbnail4.png"></video>
+                <video width="15%" src="vid/snapLenses/WaterGame_Prev.mp4" controls preload="metadata"
+                    poster="img/thumbnails/thumbnail12.png"></video>
             </div>
             <div>
                 <video width="15%" src="vid/snapLenses/OLG_Prev.mp4" controls preload="metadata"
                     poster="img/thumbnails/thumbnail5.png"></video>
-                <video width="15%" src="vid/snapLenses/PizzaHut_Prev.mp4" controls preload="metadata"
-                    poster="img/thumbnails/thumbnail6.png"></video>
+                <video width="15%" src="vid/snapLenses/BTS_Prev.mp4" controls preload="metadata"
+                    poster="img/thumbnails/thumbnail10.png"></video>
                 <video width="15%" src="vid/snapLenses/Manuka_Prev.mp4" controls preload="metadata"
                     poster="img/thumbnails/thumbnail7.png"></video>
                 <video width="15%" src="vid/snapLenses/PopTarts_Prev.mp4" controls preload="metadata"
@@ -71,12 +78,13 @@
             <div>
                 <video width="15%" src="vid/snapLenses/Purina_Prev.mp4" controls preload="metadata"
                     poster="img/thumbnails/thumbnail9.png"></video>
-                <video width="15%" src="vid/snapLenses/BTS_Prev.mp4" controls preload="metadata"
-                    poster="img/thumbnails/thumbnail10.png"></video>
+                <video width="15%" src="vid/snapLenses/PizzaHut_Prev.mp4" controls preload="metadata"
+                    poster="img/thumbnails/thumbnail6.png"></video>
                 <video width="15%" src="vid/snapLenses/Reddi_Prev.mp4" controls preload="metadata"
                     poster="img/thumbnails/thumbnail11.png"></video>
-                <video width="15%" src="vid/snapLenses/WaterGame_Prev.mp4" controls preload="metadata"
-                    poster="img/thumbnails/thumbnail12.png"></video>
+                <video width="15%" src="vid/snapLenses/GOAT_Prev.mp4" controls preload="metadata"
+                    poster="img/thumbnails/thumbnail4.png"></video>
+
             </div>
             <h3>
                 <br>
@@ -88,6 +96,16 @@
             </h3>
         </div>
         <div class="javascript hidden"></div>
+        <div class="minesweeper hidden">
+            <div class="description">
+                <h3>
+                    <font color="#ffffff">Work in progress!
+                    </font>
+                </h3>
+                <div class="minefield">
+                </div>
+            </div>
+        </div>
         <div class="diceCounterDesc hidden">
             <h3>2-Player dice game created with JavaScript. Roll the dice and collect points and hold them in your
                 bucket.<br>
@@ -323,7 +341,8 @@
         <div class="gridPuzzle hidden">
             <div class="description">
                 <h3>
-                    <font color="#ffffff">Clicking a <font color="#575757ff">blue</font> square will change the cards
+                    <font color="#ffffff">Clicking a <font color="#575757ff">blue</font> square will change the
+                        cards
                         around in + pattern.<br>Turn all
                         cards to
                         <font color="f15924">orange</font> to win.
@@ -425,6 +444,7 @@
     <script src="js/guessNumber.js"></script>
     <script src="js/memoryCards.js"></script>
     <script src="js/gridPuzzle.js"></script>
+    <script src="js/minesweeper.js"></script>
 </body>
 
 </html>
