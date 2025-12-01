@@ -1,9 +1,15 @@
 "use strict"
 
-const url = 'https://api.allorigins.win/raw?url=https://www.nytimes.com/svc/wordle/v2/2025-12-02.json';
+const today = new Date(); 
+const yyyy = today.getFullYear();
+const mm   = String(today.getMonth() + 1).padStart(2, '0');
+const dd   = String(today.getDate()).padStart(2, '0');
+const dailyUrl = `https://www.nytimes.com/svc/wordle/v2/${yyyy}-${mm}-${dd}.json`;
+let fixedUrl = 'https://api.allorigins.win/raw?url=' + dailyUrl;
+
 let wordOfTheDay;
 
-fetch(url)
+fetch(fixedUrl)
 .then(response => {
 if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -13,17 +19,17 @@ return response.json();
 .then(data => {
 const word = data.solution;
 wordOfTheDay = word.toUpperCase();
+console.log(wordOfTheDay);
 CreateGame();
 })
 .catch(err => {
 console.error('Error fetching word:', err);
-document.getElementById('word').textContent = 'Could not load word.';
 });
 
 
-const url2 = 'https://www.nytimes.com/svc/wordle/v2/2025-12-02.json';
+const fixedUrl2 = 'https://www.nytimes.com/svc/wordle/v2/2025-12-02.json' + dailyUrl;
 
-fetch(url2)
+fetch(fixedUrl2)
 .then(response => {
 if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,7 +42,6 @@ console.log("2" + word);
 })
 .catch(err => {
 console.error('Error fetching word:', err);
-document.getElementById('word').textContent = 'Could not load word.';
 });
 
 
