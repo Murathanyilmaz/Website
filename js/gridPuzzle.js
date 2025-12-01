@@ -31,7 +31,7 @@ gridCards.forEach(function (value, index) {
         if (states[index]) return;
         TapButton(index);
     })
-})
+});
 
 function TapButton(value) {
     states[value] = !states[value];
