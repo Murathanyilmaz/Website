@@ -14,9 +14,11 @@ function UpdateGrid() {
     for (let i = 0; i < gridCards.length; i++) {
         if (!states[i]) {
             gridCards[i].style.backgroundColor = "#26498bff";
+            gridCards[i].classList.add("active");
         }
         else {
             gridCards[i].style.backgroundColor = "#f15924";
+            gridCards[i].classList.remove("active");
         }
     }
     if (!states.includes(false)) {

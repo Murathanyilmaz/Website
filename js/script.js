@@ -41,7 +41,7 @@ const sections = [
 function show(section) {
     if (section == "javascript") {
         dropDownFunction();
-        section = "wordJumble";
+        section = "gridPuzzle";
     }
     if (lastSection == section) return;
     if (section != "wordJumble" &&
