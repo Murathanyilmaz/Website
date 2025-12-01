@@ -5,7 +5,15 @@ let mineCount = 10;
 let mineButtons = [];
 let mineButtonsGrid = [];
 let fieldCreated = false;
-let textColors = ["green", "yellow", "orange", "blue", "pink", "purple", "brown", "red"]
+let grid = [];
+let order = [];
+let shuffled = [];
+let boxes = [];
+let popped = false;
+let coords = [];
+let openedCoords = [];
+let tempCoords = [];
+let won = false;
 
 function CreateMinefield() {
     if (fieldCreated) return;
@@ -23,41 +31,59 @@ function CreateMinefield() {
     mineButtons.forEach(function (value, index) {
         value.addEventListener("click", function () {
             TapButton(index);
-        })
+        });
     });
 }
 CreateMinefield();
 
+function Restart() {
+    popped = false;
+    won = false;
+    grid = [];
+    boxes = [];
+    order = [];
+    mineButtons = [];
+    mineButtonsGrid = [];
+    coords = [];
+    openedCoords = [];
+    tempCoords = [];
+    document.querySelectorAll('.minefield').forEach(parent => {
+        parent.querySelectorAll('button, br').forEach(node => node.remove());
+    });
+    fieldCreated = false;
+    CreateMinefield();
+    SetGame();
+}
 
-//@input Asset.ObjectPrefab box
-//@input SceneObject parent
-//@input SceneObject resetCTA
-//@input int gridSize
-//@input int boxSize
-//@input Asset.Material boxMat
-//@input float indent
-//@input vec4[] textColors {"widget":"color"}
-
-let grid = [];
-let order = [];
-let shuffled = [];
-let boxes = [];
-let popped = false;
-let canReset = false;
-let openCount = 0;
-let coords = [];
-let openedCoords = [];
-let tempCoords = [];
+function CheckWin() {
+    console.log(openedCoords.length);
+    if (openedCoords.length >= fieldSize - mineCount) {
+        if (won) return;
+        won = true;
+        popped = true;
+        setTimeout(() => {
+            alert("Congratulations, you won! 🎉 Tap to restart!");
+            Restart();
+        }, 100);
+    }
+}
 
 function TapButton(value) {
     if (popped) return;
-    mineButtons[value].style.backgroundColor = "black";
     if (mineButtons[value].classList.contains("danger")) {
+        mineButtons[value].style.backgroundColor = "purple";
         mineButtons[value].innerHTML = "💥";
         popped = true;
-        alert("Kaboom!");
+        setTimeout(() => {
+            alert("Kaboom! 💥 Tap to restart!");
+            Restart();
+        }, 100);
     }
     else {
+        mineButtons[value].style.backgroundColor = "black";
+        tempCoords[0] = Math.floor(value / gridSize);
+        tempCoords[1] = value % gridSize;
+        openedCoords.push([tempCoords[0], tempCoords[1]]);
         if (mineButtons[value].classList[1] == "0") {
             tempCoords[0] = Math.floor(value / gridSize);
             tempCoords[1] = value % gridSize;
@@ -65,8 +91,9 @@ function TapButton(value) {
         }
         else {
             mineButtons[value].innerHTML = mineButtons[value].classList[1];
-            mineButtons[value].style.color = "green";
+            mineButtons[value].style.color = "#f15924";
         }
+        CheckWin();
     }
 }
 
@@ -106,13 +133,6 @@ function SetTexs() {
     }
 }
 
-/*
-let DelayReset = script.createEvent("DelayedCallbackEvent");
-DelayReset.bind(function () {
-    canReset = true; 
-    script.resetCTA.enabled = true;
-});
-*/
 function CheckAround(row, col) {
     let openBoxes = [];
     let div = row;
@@ -200,7 +220,7 @@ function CheckAround(row, col) {
     for (let i = 0; i < openBoxes.length; i++) {
         if (openBoxes[i].classList[1] != "0") {
             openBoxes[i].innerHTML = openBoxes[i].classList[1];
-            openBoxes[i].style.color = "green";
+            openBoxes[i].style.color = "#f15924";
         }
         openBoxes[i].style.backgroundColor = "black";
     }
@@ -218,6 +238,7 @@ function CheckAround(row, col) {
             CheckAround(div, mod);
         }
     }
+    CheckWin();
 }
 
 function Shuffle() {
@@ -228,7 +249,6 @@ function Shuffle() {
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 }
-
 
 function SetGame() {
     grid = [];
@@ -251,30 +271,10 @@ function SetGame() {
         mineButtonsGrid[div][mod].innerHTML = "&nbsp";
         mineButtonsGrid[div][mod].style.fontSize = "16px";
     }
-    ShowGrid();
+    //ShowGrid();
     SetTexs();
 }
 SetGame();
-/*
-function Reset () {
-    if (!canReset) return;
-    popped = false;
-    canReset = false;
-    grid = [];
-    boxes = [];
-    order = [];
-    openCount = 0;
-    coords = [];
-    openedCoords = [];
-    
-    
-    let childCount = script.parent.getChildrenCount();
-    for (let i = 0; i < childCount; i++) {
-        script.parent.getChild(0).destroy();
-    }
-    script.resetCTA.enabled = false;
-    SetGame();
-}*/
 
 function ShowGrid() {
     for (let i = 0; i < gridSize; i++) {
