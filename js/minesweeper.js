@@ -30,7 +30,7 @@ function CreateMinefield() {
     }
     mineButtons.forEach(function (value, index) {
         value.addEventListener("click", function () {
-            TapButton(index);
+            Minesweeper_Button(index);
         });
     });
 }
@@ -68,7 +68,7 @@ function CheckWin() {
     }
 }
 
-function TapButton(value) {
+function Minesweeper_Button(value) {
     if (popped) return;
     if (mineButtons[value].classList.contains("danger")) {
         mineButtons[value].style.backgroundColor = "purple";

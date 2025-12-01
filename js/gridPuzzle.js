@@ -29,11 +29,11 @@ function UpdateGrid() {
 gridCards.forEach(function (value, index) {
     value.addEventListener("click", function () {
         if (states[index]) return;
-        TapButton(index);
+        GridGame_Button(index);
     })
 });
 
-function TapButton(value) {
+function GridGame_Button(value) {
     states[value] = !states[value];
     if (value % 5 == 0) {
         states[value - 1 + 2] = !states[value - 1 + 2];
@@ -65,12 +65,12 @@ function TapButton(value) {
 
 function CreatePuzzle() {
     let rand1 = Math.floor(Math.random() * 25);
-    TapButton(rand1);
+    GridGame_Button(rand1);
     while (phase < 10) {
         let rand2 = Math.floor(Math.random() * 25);
         if (rand2 != rand1 && states[rand2]) {
             steps.unshift(rand2);
-            TapButton(rand2);
+            GridGame_Button(rand2);
             UpdateGrid();
         }
         phase++;
