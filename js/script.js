@@ -2,17 +2,18 @@
 
 const snapchatButton = document.getElementById("snapchatButton");
 const unityButton = document.getElementById("unityButton");
-const javascriptButton = document.getElementById("javasScriptButton");
+const javascriptButton = document.getElementById("javaScriptButton");
 const portfolioButton = document.getElementById("portfolioButton");
 const aboutmeButton = document.getElementById("aboutmeButton")
 const wordJumbleButton = document.getElementById("wordJumbleButton");
 const diceCounterButton = document.getElementById("diceCounterButton");
-const guessNumberButton = document.getElementById("guessNumberButton");
 const memoryCardsButton = document.getElementById("memoryCardsButton");
 const gridPuzzleButton = document.getElementById("gridPuzzleButton");
 const minesweeperButton = document.getElementById("minesweeperButton");
 
 let lastSection;
+let inJS = false;
+let jsSection = "gridPuzzle";
 
 function dropDownFunction() {
     document.getElementById("jsDropdown").classList.toggle("show");
@@ -28,11 +29,10 @@ function dropDownFunction2() {
 const sections = [
     "snapchat",
     "unity",
-    "javascript",
+    "javaScript",
     "portfolio",
     "aboutme",
     "wordJumble",
-    "guessNumber",
     "memoryCards",
     "diceCounter",
     "diceCounterDesc",
@@ -42,21 +42,35 @@ const sections = [
 
 function show(section) {
     if (section == "javascript") {
+        if (inJS) return;
+        inJS = true;
         dropDownFunction();
-        section = "gridPuzzle";
+        section = jsSection;
     }
     if (lastSection == section) return;
+    lastSection = section;
     if (section != "wordJumble" &&
         section != "diceCounter" &&
-        section != "guessNumber" &&
         section != "memoryCards" &&
         section != "gridPuzzle" &&
         section != "minesweeper") {
         dropDownFunction2();
+        inJS = false;
+    }
+    else {
+        jsSection = section;
     }
     sections.forEach(name => {
         const el = document.querySelector("." + name);
         el.classList.toggle("hidden", name !== section)
+        if (section == "diceCounter") {
+            console.log(name);
+            document.querySelector(".diceCounterDesc").classList.toggle("hidden", false);
+        }
+        const button = document.querySelector("#" + name + "Button");
+        if (name != "diceCounterDesc") {
+            button.classList.toggle("active", name === section);
+        }
     });
     if (section == "aboutme") {
         document.querySelector('.aboutme').classList.add('visible');
@@ -71,7 +85,6 @@ function show(section) {
     else if (section == "minesweeper") {
         CreateMinefield();
     }
-    lastSection = section;
 }
 
 snapchatButton.onclick = () => show("snapchat");
@@ -81,7 +94,6 @@ portfolioButton.onclick = () => show("portfolio");
 aboutmeButton.onclick = () => show("aboutme");
 wordJumbleButton.onclick = () => show("wordJumble");
 diceCounterButton.onclick = () => show("diceCounter");
-guessNumberButton.onclick = () => show("guessNumber");
 memoryCardsButton.onclick = () => show("memoryCards");
 gridPuzzleButton.onclick = () => show("gridPuzzle");
 minesweeperButton.onclick = () => show("minesweeper");

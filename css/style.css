@@ -90,6 +90,11 @@ main {
     display: block;
 }
 
+.navigation a.active {
+    text-decoration: overline;
+    color: #f15924;
+}
+
 .navigation a:hover {
     text-decoration: overline;
     color: #f15924;

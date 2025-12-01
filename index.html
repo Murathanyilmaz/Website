@@ -9,7 +9,6 @@
 
     <link href="css/diceCounter.css" rel="stylesheet" />
     <link href="css/wordJumble.css" rel="stylesheet" />
-    <link href="css/guessNumber.css" rel="stylesheet" />
     <link href="css/memoryCards.css" rel="stylesheet" />
     <link href="css/gridPuzzle.css" rel="stylesheet" />
     <link href="css/minesweeper.css" rel="stylesheet" />
@@ -24,16 +23,16 @@
             <img width=120px src="img/icons/favicon.png" alt="Murathan Yılmaz Website Logo" />
         </div>
         <nav class="navigation">
+            <a href="#aboutme" class="nav_button active" id="aboutmeButton">About Me</a>
+            <span class="separator">|</span>
             <a href="#snapchat" class="nav_button" id="snapchatButton">Snapchat</a>
+            <span class="separator">|</span>
+            <a href="#javaScript" class="nav_button" id="javaScriptButton">JavaScript <i id="arrow"
+                    class="fa fa-caret-down"></i></a>
             <span class="separator">|</span>
             <a href="#unity" class="nav_button" id="unityButton">Unity</a>
             <span class="separator">|</span>
-            <a href="#javascript" class="nav_button" id="javasScriptButton">JavaScript <i id="arrow"
-                    class="fa fa-caret-down"></i></a>
-            <span class="separator">|</span>
             <a href="#portfolio" class="nav_button" id="portfolioButton">2D/3D</a>
-            <span class="separator">|</span>
-            <a href="#aboutme" class="nav_button" id="aboutmeButton">About Me</a>
             <div class="dropdown-content" id="jsDropdown">
                 <a href="#gridPuzzle" class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
                 <span class="separator">|</span>
@@ -45,7 +44,7 @@
                 <span class="separator">|</span>
                 <a href="#diceCounter" class="nav_button" id="diceCounterButton">Dice Game</a>
                 <span class="separator">|</span>
-                <a href="#guessNumber" class="nav_button" id="guessNumberButton">Guess My Number</a>
+                <a href="#comingSoon" class="nav_button" id="comingSoonButton">Coming Soon...</a>
             </div>
         </nav>
     </header>
@@ -95,7 +94,7 @@
                 <br>
             </h3>
         </div>
-        <div class="javascript hidden"></div>
+        <div class="javaScript hidden"></div>
         <div class="minesweeper hidden">
             <div class="description">
                 <h3>
@@ -107,10 +106,9 @@
             </div>
         </div>
         <div class="diceCounterDesc hidden">
-            <h3>2-Player dice game created with JavaScript. Roll the dice and collect points and hold them in your
-                bucket.<br>
+            <h4>Roll the dice and collect points and hold them in your bucket.<br>
                 If you roll 1, it's your opponents turn. First player to reach 100 points wins!
-            </h3>
+            </h4>
         </div>
         <div class="diceCounter hidden">
             <section class="player player--0 player--active">
@@ -229,30 +227,6 @@
                     <button class="harfler2" id="buttonEnter">✔</button>
                 </div>
             </div>
-        </div>
-        <div class="guessNumber hidden">
-            <div class="description">
-                <h3>Guess the number and check if you got that correct!</h3>
-            </div>
-            <header>
-                <h1>Guess My Number!</h1>
-                <p class="between">(Between 1 and 20)</p>
-                <button class="btn again">Again!</button>
-                <div class="number">?</div>
-            </header>
-            <main>
-                <section class="left">
-                    <input type="number" class="guess" />
-                    <button class="btn check">Check!</button>
-                </section>
-                <section class="right">
-                    <p class="message">Start guessing...</p>
-                    <p class="label-score-guess">💯 Score: <span class="score-guess"></span></p>
-                    <p class="label-highscore">
-                        🥇 Highscore: <span class="highscore">0</span>
-                    </p>
-                </section>
-            </main>
         </div>
         <div class="portfolio hidden">
             <div class="description">
@@ -403,7 +377,7 @@
         </div>
         <div class="aboutme">
             <div class="description">
-                <h2>About Me</h2>
+                <h2>Who am <font color="#f15924">I </font>?</h2>
                 <p>
                     I’m a passionate software developer specializing in interactive experiences and
                     AR/VR.
@@ -441,7 +415,6 @@
     <script src="js/wordJumbleLib.js"></script>
     <script src="js/wordJumble.js"></script>
     <script src="js/diceCounter.js"></script>
-    <script src="js/guessNumber.js"></script>
     <script src="js/memoryCards.js"></script>
     <script src="js/gridPuzzle.js"></script>
     <script src="js/minesweeper.js"></script>

@@ -56,11 +56,19 @@ function Restart() {
 }
 
 function CheckWin() {
-    console.log(openedCoords.length);
     if (openedCoords.length >= fieldSize - mineCount) {
         if (won) return;
         won = true;
         popped = true;
+
+        for (let i = 0; i < mineCount; i++) {
+            let value = shuffled[i];
+            let div = Math.floor(value / gridSize);
+            let mod = value % gridSize;
+            mineButtonsGrid[div][mod].innerHTML = "🎉";
+            mineButtonsGrid[div][mod].style.fontSize = "16px";
+            mineButtonsGrid[div][mod].style.backgroundColor = "green";
+        }
         setTimeout(() => {
             alert("Congratulations, you won! 🎉 Tap to restart!");
             Restart();

@@ -95,7 +95,6 @@ var enterEvent = function () {
                     }
                 }
             }
-            console.log(flags[i], flaggedFor[i], currentGuessedLetter)
         }
         for (let i = 0; i < 5; i++) {
             if (flags[i] == 0) {
