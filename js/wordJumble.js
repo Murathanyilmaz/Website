@@ -1,16 +1,60 @@
 "use strict"
-const allowed = ["A", "B", "C", "Ç", "D", "E", "F", "G", "Ğ", "H", "I", "İ", "J", "K", "L", "M", "N", "O", "Ö", "P", "Q", "R", "S", "Ş", "T", "U", "Ü", "V", "W", "X", "Y", "Z",
-    "a", "b", "c", "ç", "d", "e", "f", "g", "ğ", "h", "ı", "i", "j", "k", "l", "m", "n", "o", "ö", "p", "q", "r", "s", "ş", "t", "u", "ü", "v", "w", "x", "y", "z"];
-const buttons = ["A", "B", "C", "Ç", "D", "E", "F", "G", "Ğ", "H", "I", "İ", "J", "K", "L", "M", "N", "O", "Ö", "P", "Q", "R", "S", "Ş", "T", "U", "Ü", "V", "W", "X", "Y", "Z"];
+
+const url = 'https://api.allorigins.win/raw?url=https://www.nytimes.com/svc/wordle/v2/2025-12-02.json';
+let wordOfTheDay;
+
+fetch(url)
+.then(response => {
+if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+}
+return response.json();
+})
+.then(data => {
+const word = data.solution;
+wordOfTheDay = word.toUpperCase();
+CreateGame();
+})
+.catch(err => {
+console.error('Error fetching word:', err);
+document.getElementById('word').textContent = 'Could not load word.';
+});
+
+
+const url2 = 'https://www.nytimes.com/svc/wordle/v2/2025-12-02.json';
+
+fetch(url2)
+.then(response => {
+if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+}
+return response.json();
+})
+.then(data => {
+const word = data.solution;
+console.log("2" + word);
+})
+.catch(err => {
+console.error('Error fetching word:', err);
+document.getElementById('word').textContent = 'Could not load word.';
+});
+
+
+const allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const buttons = ["A", "B", "C", "D", "E", "F", "G", "H", "I","J", "K", "L", "M", "N", "O", "P", "Q", "R", "S","T", "U", "V", "W", "X", "Y", "Z"];
 
 const wotdArray = [];
 const letterCount = [];
-for (let i = 0; i < buttons.length; i++) {
-    letterCount[buttons[i]] = 0;
-}
-for (let i = 0; i < 5; i++) {
-    wotdArray[i] = wordOfTheDay.substring(i, i + 1);
-    letterCount[wordOfTheDay.substring(i, i + 1)]++;
+
+function CreateGame () {
+    for (let i = 0; i < buttons.length; i++) {
+        letterCount[buttons[i]] = 0;
+    }
+    for (let i = 0; i < 5; i++) {
+        wotdArray[i] = wordOfTheDay.substring(i, i + 1);
+        letterCount[wordOfTheDay.substring(i, i + 1)]++;
+    }
 }
 
 const flags = [];
