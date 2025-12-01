@@ -1,0 +1,18 @@
+.gridPuzzle {
+    font-family: 'Morpheus', sans-serif;
+    text-align: center;
+}
+
+.gridPuzzle table {
+    margin: auto;
+}
+
+.gridPuzzle button {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    background-color: #f15924;
+    border-radius: 5%;
+    transition-duration: 0.5s;
+}

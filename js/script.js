@@ -39,7 +39,6 @@ const sections = [
 ];
 
 function show(section) {
-    console.log(section);
     if (section == "javascript") {
         dropDownFunction();
         section = "wordJumble";
