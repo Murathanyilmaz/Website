@@ -26,25 +26,6 @@ CreateGame();
 console.error('Error fetching word:', err);
 });
 
-
-const fixedUrl2 = 'https://www.nytimes.com/svc/wordle/v2/2025-12-02.json' + dailyUrl;
-
-fetch(fixedUrl2)
-.then(response => {
-if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-}
-return response.json();
-})
-.then(data => {
-const word = data.solution;
-console.log("2" + word);
-})
-.catch(err => {
-console.error('Error fetching word:', err);
-});
-
-
 const allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const buttons = ["A", "B", "C", "D", "E", "F", "G", "H", "I","J", "K", "L", "M", "N", "O", "P", "Q", "R", "S","T", "U", "V", "W", "X", "Y", "Z"];
