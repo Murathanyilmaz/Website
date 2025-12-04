@@ -55,7 +55,8 @@ function show(section) {
         section != "diceCounter" &&
         section != "memoryCards" &&
         section != "gridPuzzle" &&
-        section != "minesweeper") {
+        section != "minesweeper"&&
+        section != "threeJS") {
         dropDownFunction2();
         inJS = false;
     }
