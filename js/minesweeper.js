@@ -37,7 +37,7 @@ function CreateMinefield() {
     });
 }
 
-function Restart() {
+function RestartMinesweeper() {
     popped = false;
     won = false;
     grid = [];
@@ -71,7 +71,7 @@ function CheckWin() {
         }
         setTimeout(() => {
             alert("Congratulations, you won! 🎉 Tap to restart!");
-            Restart();
+            RestartMinesweeper();
         }, 100);
     }
 }
@@ -84,7 +84,7 @@ function Minesweeper_Button(value) {
         popped = true;
         setTimeout(() => {
             alert("Kaboom! 💥 Tap to restart!");
-            Restart();
+            RestartMinesweeper();
         }, 100);
     }
     else {

@@ -1,16 +1,32 @@
 const gridfield = document.querySelector(".gridfield");
+const winCountField = document.querySelector(".gridWinCount");
+
 let gridCards = [];
-let steps = [];
 let phase = 0;
-let cardCounter = 0;
-let canTap = true;
-let states = [
-    true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true
-];
+let states = new Array(25);
+states.fill(true);
+let winCount = 0;
+winCountField.innerHTML = winCount;
+winCountField.style.color = "#F15924";
+/*
+states = states.map(() => true);
+states.fill(true);
+const states = new Array(25).fill(false);
+*/
+
+function RestartGridPuzzle () {
+    gridCards.forEach(el => {
+        el.style.margin = "2px";
+    });
+    phase = 0;
+    states.fill(true);
+    console.log(states);
+    CreatePuzzle();
+    UpdateGrid();
+    gridCards.forEach(el => {
+        el.style.margin = "2px";
+    });
+}
 
 function CreateGridPuzzle() {
     const gridTable = document.createElement("table");
@@ -27,7 +43,6 @@ function CreateGridPuzzle() {
             gridCards.push(button);
         }
     }
-    //gridCards = document.querySelectorAll(".gridCard");
     gridCards.forEach(function (value, index) {
         value.addEventListener("click", function () {
             if (states[index]) return;
@@ -39,7 +54,7 @@ function CreateGridPuzzle() {
 }
 
 function UpdateGrid() {
-    for (let i = 0; i < gridCards.length; i++) {
+    gridCards.forEach((el, i) => {
         if (!states[i]) {
             gridCards[i].style.backgroundColor = "#3264a8";
             gridCards[i].classList.add("active");
@@ -48,11 +63,19 @@ function UpdateGrid() {
             gridCards[i].style.backgroundColor = "#F15924";
             gridCards[i].classList.remove("active");
         }
-    }
+    })
     if (!states.includes(false)) {
-        setTimeout(() => alert("Congratulations!"), 1000);
+        winCount++;
+        winCountField.innerHTML = winCount;
+        gridCards.forEach(el => {
+            el.style.margin = "-5px";
+            el.style.backgroundColor = "#4a4948";
+        });
+        setTimeout(() => {
+            //alert("Congratulations, you won! 🎉 Tap to restart!");
+            RestartGridPuzzle();
+        }, 1000);
     }
-
 }
 
 function GridGame_Button(value) {
@@ -81,7 +104,6 @@ function GridGame_Button(value) {
         states[value - 1 + 6] = !states[value - 1 + 6];
         states[value - 5] = !states[value - 5];
     }
-    steps.unshift(value);
     UpdateGrid();
 }
 
@@ -91,7 +113,6 @@ function CreatePuzzle() {
     while (phase < 10) {
         let rand2 = Math.floor(Math.random() * 25);
         if (rand2 != rand1 && states[rand2]) {
-            steps.unshift(rand2);
             GridGame_Button(rand2);
         }
         phase++;
