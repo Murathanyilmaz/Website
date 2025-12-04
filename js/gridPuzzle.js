@@ -1,4 +1,5 @@
-const gridCards = document.querySelectorAll(".gridCard");
+const gridfield = document.querySelector(".gridfield");
+let gridCards = [];
 let steps = [];
 let phase = 0;
 let cardCounter = 0;
@@ -10,6 +11,33 @@ let states = [
     true, true, true, true, true,
     true, true, true, true, true
 ];
+
+function CreateGridPuzzle() {
+    const gridTable = document.createElement("table");
+    gridfield.appendChild(gridTable);
+    for (let i = 0; i < 5; i++) {
+        const tr = document.createElement("tr");
+        gridTable.appendChild(tr);
+        for (let j = 0; j < 5; j++) {
+            const td = document.createElement("td");
+            tr.appendChild(td);
+            const button = document.createElement("button");
+            button.className = "gridCard";
+            td.appendChild(button);
+            gridCards.push(button);
+        }
+    }
+    //gridCards = document.querySelectorAll(".gridCard");
+    gridCards.forEach(function (value, index) {
+        value.addEventListener("click", function () {
+            if (states[index]) return;
+            GridGame_Button(index);
+        })
+    });
+    CreatePuzzle();
+    UpdateGrid();
+}
+
 function UpdateGrid() {
     for (let i = 0; i < gridCards.length; i++) {
         if (!states[i]) {
@@ -22,16 +50,10 @@ function UpdateGrid() {
         }
     }
     if (!states.includes(false)) {
-        setTimeout(() => alert("Congratulations!"), 1000)
+        setTimeout(() => alert("Congratulations!"), 1000);
     }
 
 }
-gridCards.forEach(function (value, index) {
-    value.addEventListener("click", function () {
-        if (states[index]) return;
-        GridGame_Button(index);
-    })
-});
 
 function GridGame_Button(value) {
     states[value] = !states[value];
@@ -71,9 +93,8 @@ function CreatePuzzle() {
         if (rand2 != rand1 && states[rand2]) {
             steps.unshift(rand2);
             GridGame_Button(rand2);
-            UpdateGrid();
         }
         phase++;
     }
+    UpdateGrid();
 }
-CreatePuzzle();

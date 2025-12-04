@@ -1,4 +1,4 @@
-.diceCounter {
+.rollTheDiceGame {
   font-family: 'Nunito', sans-serif;
   color: #333;
   background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
@@ -8,6 +8,16 @@
   backdrop-filter: blur(200px);
   filter: blur();
   overflow: hidden;
+}
+
+.rollTheDice_desc {
+    text-align: center;
+    border-radius: 9px;
+    font-size: 14pt;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    background-color: #c7365f;
+    padding: 1px;
 }
 
 .player {

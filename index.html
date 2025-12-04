@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Murathan Yılmaz</title>
-    <link href="css/diceCounter.css" rel="stylesheet" />
+    <link href="css/rollTheDice.css" rel="stylesheet" />
     <link href="css/wordJumble.css" rel="stylesheet" />
     <link href="css/memoryCards.css" rel="stylesheet" />
     <link href="css/gridPuzzle.css" rel="stylesheet" />
@@ -19,7 +19,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-V48G9CWW2B');
     </script>
 </head>
@@ -42,13 +41,13 @@
             <div class="dropdown-content" id="jsDropdown">
                 <a class="nav_button" id="gridPuzzleButton">Grid Puzzle</a>
                 <span class="separator">|</span>
-                <a class="nav_button" id="memoryCardsButton">Memory Game</a>
+                <a class="nav_button" id="memoryCardsButton">Memory Cards</a>
                 <span class="separator">|</span>
                 <a class="nav_button" id="wordJumbleButton">Jumble</a>
                 <span class="separator">|</span>
                 <a class="nav_button" id="minesweeperButton">Minesweeper</a>
                 <span class="separator">|</span>
-                <a class="nav_button" id="diceCounterButton">Dice Game</a>
+                <a class="nav_button" id="rollTheDiceButton">Roll the Dice</a>
                 <span class="separator">|</span>
                 <a class="nav_button" id="threeJSButton">Three.js Tests</a>
             </div>
@@ -112,37 +111,39 @@
                     <font color="#ffffff">Classic Minesweeper game. Mine count: <font color="f15924">10</font>
                     </font>
                 </h3>
-                <div class="minefield">
-                </div>
+            </div>
+            <div class="minefield">
             </div>
         </div>
-        <div class="diceCounterDesc hidden">
-            <h4>Roll the dice and collect points and hold them in yourbucket.<br>
-                If you roll 1, it's your opponents turn. First player to reach 100 points wins!
-            </h4>
-        </div>
-        <div class="diceCounter hidden">
-            <section class="player player--0 player--active">
-                <h2 class="name" id="name--0">Player 1</h2>
-                <p class="score" id="score--0">0</p>
-                <div class="current">
-                    <p class="current-label">Current</p>
-                    <p class="current-score" id="current--0">0</p>
-                </div>
-            </section>
-            <section class="player player--1">
-                <h2 class="name" id="name--1">Player 2</h2>
-                <p class="score" id="score--1">0</p>
-                <div class="current">
-                    <p class="current-label">Current</p>
-                    <p class="current-score" id="current--1">0</p>
-                </div>
-            </section>
+        <div class="rollTheDice hidden">
+            <div class="rollTheDice_desc">
+                <h4>Roll the dice and collect points and hold them in yourbucket.<br>
+                    If you roll 1, it's your opponents turn. First player to reach 100 points wins!
+                </h4>
+            </div>
+            <div class="rollTheDiceGame">
+                <section class="player player--0 player--active">
+                    <h2 class="name" id="name--0">Player 1</h2>
+                    <p class="score" id="score--0">0</p>
+                    <div class="current">
+                        <p class="current-label">Current</p>
+                        <p class="current-score" id="current--0">0</p>
+                    </div>
+                </section>
+                <section class="player player--1">
+                    <h2 class="name" id="name--1">Player 2</h2>
+                    <p class="score" id="score--1">0</p>
+                    <div class="current">
+                        <p class="current-label">Current</p>
+                        <p class="current-score" id="current--1">0</p>
+                    </div>
+                </section>
 
-            <img src="img/dice/dice-5.png" alt="Playing dice" class="dice" />
-            <button class="btn btn--new">🔄</button>
-            <button class="btn btn--roll">🎲</button>
-            <button class="btn btn--hold">📥</button>
+                <img src="img/dice/dice-5.png" alt="Playing dice" class="dice" />
+                <button class="btn btn--new">🔄</button>
+                <button class="btn btn--roll">🎲</button>
+                <button class="btn btn--hold">📥</button>
+            </div>
         </div>
         <div class="wordJumble hidden">
             <div class="description">
@@ -328,43 +329,8 @@
                         <font color="#F15924">orange</font> to win.
                     </font>
                 </h3>
-                <table>
-                    <tr>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                        <td><button class="gridCard"></button></td>
-                    </tr>
-                </table>
+            </div>
+            <div class="gridfield">
             </div>
         </div>
         <div class="unity hidden">
@@ -421,7 +387,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="js/wordJumble.js"></script>
-    <script src="js/diceCounter.js"></script>
+    <script src="js/rollTheDice.js"></script>
     <script src="js/memoryCards.js"></script>
     <script src="js/gridPuzzle.js"></script>
     <script src="js/minesweeper.js"></script>

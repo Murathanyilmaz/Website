@@ -1,16 +1,10 @@
 "use strict"
-
-const snapchatButton = document.getElementById("snapchatButton");
-const unityButton = document.getElementById("unityButton");
-const javascriptButton = document.getElementById("javaScriptButton");
-const portfolioButton = document.getElementById("portfolioButton");
-const aboutmeButton = document.getElementById("aboutmeButton")
-const wordJumbleButton = document.getElementById("wordJumbleButton");
-const diceCounterButton = document.getElementById("diceCounterButton");
-const memoryCardsButton = document.getElementById("memoryCardsButton");
-const gridPuzzleButton = document.getElementById("gridPuzzleButton");
-const minesweeperButton = document.getElementById("minesweeperButton");
-const threeJSButton = document.getElementById("threeJSButton");
+const navButtons = document.querySelectorAll(".nav_button");
+let sections = [];
+navButtons.forEach((el, i) => {
+    sections[i] = el.id.replace("Button", "");
+    el.onclick = () => ShowSection(sections[i]);
+});
 
 let lastSection = "aboutme";
 let inJS = false;
@@ -18,6 +12,7 @@ let jsSection = "gridPuzzle";
 
 let wordJumbleLoaded = false;
 let minesweeperLoaded = false;
+let gridPuzzleLoaded = false;
 
 function dropDownFunction() {
     document.getElementById("jsDropdown").classList.toggle("show");
@@ -30,32 +25,19 @@ function dropDownFunction2() {
     document.getElementById("arrow").classList.remove("fa-caret-up");
 }
 
-const sections = [
-    "snapchat",
-    "unity",
-    "javaScript",
-    "portfolio",
-    "aboutme",
-    "wordJumble",
-    "memoryCards",
-    "diceCounter",
-    "diceCounterDesc",
-    "gridPuzzle",
-    "minesweeper",
-    "threeJS"
-];
-
-function show(section) {
-    if (section == "javascript") {
+function ShowSection (section) {
+    if (section == "javaScript") {
         if (inJS) return;
         inJS = true;
         dropDownFunction();
         section = jsSection;
     }
     if (lastSection == section) return;
+    document.querySelector("." + lastSection).classList.toggle("hidden", true);
+    document.querySelector("#" + lastSection + "Button").classList.toggle("active", false);
     lastSection = section;
     if (section != "wordJumble" &&
-        section != "diceCounter" &&
+        section != "rollTheDice" &&
         section != "memoryCards" &&
         section != "gridPuzzle" &&
         section != "minesweeper"&&
@@ -66,17 +48,8 @@ function show(section) {
     else {
         jsSection = section;
     }
-    sections.forEach(name => {
-        const el = document.querySelector("." + name);
-        el.classList.toggle("hidden", name !== section)
-        if (section == "diceCounter") {
-            document.querySelector(".diceCounterDesc").classList.toggle("hidden", false);
-        }
-        const button = document.querySelector("#" + name + "Button");
-        if (name != "diceCounterDesc") {
-            button.classList.toggle("active", name === section);
-        }
-    });
+    document.querySelector("." + lastSection).classList.toggle("hidden", false);
+    document.querySelector("#" + lastSection + "Button").classList.toggle("active", true);
     if (section == "aboutme") {
         document.querySelector('.aboutme').classList.add('visible');
         const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
@@ -90,30 +63,22 @@ function show(section) {
     else if (section == "wordJumble") {
         if (!wordJumbleLoaded) {
             wordJumbleLoaded = true;
-            console.log("Creating Jumble Game");
             CreateWordJumble();
         }
     }
     else if (section == "minesweeper") {
         if (!minesweeperLoaded) {
             minesweeperLoaded = true;
-            console.log("Creating Minesweeper Game");
             CreateMinesweeperGame();
         }
     }
+    else if (section == "gridPuzzle") {
+        if (!gridPuzzleLoaded) {
+            gridPuzzleLoaded = true;
+            CreateGridPuzzle();
+        }
+    }
 }
-
-snapchatButton.onclick = () => show("snapchat");
-unityButton.onclick = () => show("unity");
-javascriptButton.onclick = () => show("javascript");
-portfolioButton.onclick = () => show("portfolio");
-aboutmeButton.onclick = () => show("aboutme");
-wordJumbleButton.onclick = () => show("wordJumble");
-diceCounterButton.onclick = () => show("diceCounter");
-memoryCardsButton.onclick = () => show("memoryCards");
-gridPuzzleButton.onclick = () => show("gridPuzzle");
-minesweeperButton.onclick = () => show("minesweeper");
-threeJSButton.onclick = () => show("threeJS");
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');
@@ -147,4 +112,11 @@ window.addEventListener('DOMContentLoaded', () => {
             }, index * 500);
         });
     }, 100);
+});
+
+document.addEventListener('keydown', (event) => {
+    if (lastSection != "portfolio") return;
+    if (event.key == "Escape" && !lightbox.classList.contains("hidden")) {
+       lightbox.classList.add('hidden');
+    }
 });

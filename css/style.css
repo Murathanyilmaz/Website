@@ -63,16 +63,6 @@ canvas {
     font-family: 'Nunito', Geneva, Verdana, sans-serif;
 }
 
-.diceCounterDesc {
-    text-align: center;
-    border-radius: 9px;
-    font-size: 14pt;
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    background-color: #c7365f;
-    padding: 1px;
-}
-
 .nav_button {
     display: inline-block;
     color: #ffffff;

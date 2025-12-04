@@ -20,7 +20,6 @@ function CreateWordJumble () {
     .then(data => {
         const word = data.solution;
         wordOfTheDay = word.toUpperCase();
-        console.log(wordOfTheDay);
         CreateGame();
         document.querySelector(".jumble").classList.toggle("hidden", false);
         document.querySelector(".jumbleKeyboard").classList.toggle("hidden", false);
