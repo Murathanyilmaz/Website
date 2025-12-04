@@ -5,7 +5,7 @@ let gridCards = [];
 let phase = 0;
 let states = new Array(25);
 states.fill(true);
-let winCount = 0;
+let winCount = Number(localStorage.getItem('winCount')) || 0;
 winCountField.innerHTML = winCount;
 winCountField.style.color = "#F15924";
 /*
@@ -66,6 +66,7 @@ function UpdateGrid() {
     })
     if (!states.includes(false)) {
         winCount++;
+        localStorage.setItem('winCount', winCount);
         winCountField.innerHTML = winCount;
         gridCards.forEach(el => {
             el.style.margin = "-5px";
