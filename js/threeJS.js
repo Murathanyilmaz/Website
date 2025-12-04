@@ -1,25 +1,32 @@
-//CREATE SCENE
-const container = document.querySelector('.threeJS-area');
-
 const scene = new THREE.Scene();
 const loader = new THREE.GLTFLoader();
-scene.background = new THREE.Color(0x101010);
-const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 10);//FOV-ASPECT-NEAR-FAR
-camera.position.z = 3;
-//CLEAN BACKGROUND
+
+const container = document.querySelector('.threeJS-area');
+
+scene.background = new THREE.Color(0x202020);
+const scaler = 0.6;
+const aspect = 0.60;
+let widthSize = window.innerWidth * scaler;
+let heightSize = aspect * widthSize;
+const camera = new THREE.PerspectiveCamera(90, 1, 0.1, 10);//FOV-ASPECT-NEAR-FAR
+camera.position.z = 5;
+
+/*
 const renderer = new THREE.WebGLRenderer({
     alpha: true
 });
-//scene.background = null;
-//SCREEN SIZE
-renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+scene.background = null;*/
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(widthSize, heightSize);
 document.querySelector('.threeJS-area').appendChild(renderer.domElement);
 //CREATE MESH
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
 const cube = new THREE.Mesh(geometry, material);
-cube.position.x = 1;
+cube.position.x = 3;
 cube.position.y = -1;
+cube.name= "Cube1";
 scene.add(cube);
 //LIGHTS
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -28,40 +35,137 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
 directionalLight.position.set(5, 5, 5); 
 //directionalLight.target.position.set(0, 0, 0); //Default
-
 scene.add(directionalLight);
 //scene.add(directionalLight.target); // Need to add the target if you change its position
+
+let currentIntersected = null;
+
 
 //RAYCAST
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-window.addEventListener('click', onMouseClick, false);
+window.addEventListener('click', onMouseClick);
+window.addEventListener("mousemove", onMouseMove);
 
-function onMouseClick(event) {
+let spawnPos = new THREE.Vector2(0, 0);
+
+function CalculateCoords (value) {
     const rect = container.getBoundingClientRect();
-    const clientX_relative = event.clientX - rect.left;
-    const clientY_relative = event.clientY - rect.top;
-    mouse.x = (clientX_relative / window.innerWidth) * 2 - 1;
-    mouse.y = -(clientY_relative / window.innerHeight) * 2 + 1;
+    const clientX_relative = value.clientX - rect.left; 
+    const clientY_relative = value.clientY - rect.top;
+    mouse.x = ((clientX_relative / rect.width) *  2 - 1) / scaler; 
+    mouse.y = -(clientY_relative / rect.height) * 2 + 1;
+    spawnPos.x = mouse.x * camera.position.z;
+    spawnPos.y = mouse.y * camera.position.z;
+    document.querySelector(".threeJS-desc").innerHTML = mouse.x.toFixed(2) + ":" + mouse.y.toFixed(2);
+}
+function onMouseMove(event) {
+    CalculateCoords(event);
+    checkHover();
+    //checkIntersections();
+}
+function onMouseClick(event) {
+    CalculateCoords(event);
     checkIntersections();
 }
 
 let monkey = null;
+function checkHover() {
+    raycaster.setFromCamera(mouse, camera);
+    const objectsToTest = [cube]; 
+    if (monkey) {
+        objectsToTest.push(monkey);
+    }
+    // Check intersections (recursive: true)
+    const intersects = raycaster.intersectObjects(objectsToTest, true);
+    if (intersects.length > 0) {
+        const hitObject = intersects[0].object;
+        
+        // Use the ancestor logic to find the main parent (cube or monkey)
+        let foundObject = null;
+        
+        // Check for Cube
+        if (hitObject === cube) {
+            foundObject = cube;
+        } else {
+            // Check for Monkey model (by traversing parents)
+            let currentParent = hitObject;
+            while (currentParent) {
+                if (currentParent === monkey) {
+                    foundObject = monkey;
+                    break;
+                }
+                currentParent = currentParent.parent;
+            }
+        }
+        
+        // --- Cursor Management ---
+        if (foundObject && foundObject !== currentIntersected) {
+            // NEW OBJECT HOVERED
+            currentIntersected = foundObject;
+            container.style.cursor = 'pointer'; // Change cursor to a hand
+            console.log("HOVERING:", currentIntersected.name || 'Monkey Model');
+        }
+        
+    } else {
+        if (currentIntersected) {
+            currentIntersected = null;
+            container.style.cursor = 'default';
+        }
+    }
+}
 
 function checkIntersections() {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
-    console.log(intersects.length);
+    
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xff00ff});
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.x = spawnPos.x;
+    cube.position.y = spawnPos.y;
+    scene.add(cube);
+
     /*if (intersects.length > 0) {
-        console.log(intersects.length);
         const firstHit = intersects[0].object;
-        console.log(firstHit.name);
-        console.log('Clicked on:', firstHit.name || firstHit.uuid);
-        if (monkey != null && firstHit === monkey) {
-            console.log("Monkey");
-        } 
-        else if (firstHit === cube) {
-            console.log("Cube");
+        let objectToRemove = null;
+
+        if (firstHit === cube) {
+            console.log("Cube Clicked!");
+            objectToRemove = cube;
+        }
+
+        let currentParent = firstHit;
+        while (currentParent) {
+            if (currentParent === monkey) {
+                console.log("Monkey Model Clicked!");
+                objectToRemove = monkey;
+                break;
+            }
+            currentParent = currentParent.parent;
+        }
+        
+        // --- Deletion Logic ---
+        if (objectToRemove) {
+            // Traverse and dispose resources (memory cleanup)
+            objectToRemove.traverse((child) => {
+                if (child.isMesh) {
+                    if (child.geometry) child.geometry.dispose();
+                    if (Array.isArray(child.material)) {
+                        child.material.forEach(m => m.dispose());
+                    } else if (child.material) {
+                        child.material.dispose();
+                    }
+                }
+            });
+
+            // Remove the object from the scene
+            scene.remove(objectToRemove);
+            
+            // If the monkey was removed, set the global reference to null
+            if (objectToRemove === monkey) {
+                monkey = null;
+            }
         }
     }*/
 }
@@ -105,7 +209,9 @@ function animate() {
         });
     }
 
-    
+    widthSize = window.innerWidth * scaler;
+    heightSize = aspect * widthSize;
+    renderer.setSize(widthSize, heightSize);
     renderer.render(scene, camera);
 }
 animate();
