@@ -13,11 +13,11 @@ let states = [
 function UpdateGrid() {
     for (let i = 0; i < gridCards.length; i++) {
         if (!states[i]) {
-            gridCards[i].style.backgroundColor = "#26498bff";
+            gridCards[i].style.backgroundColor = "#3264a8";
             gridCards[i].classList.add("active");
         }
         else {
-            gridCards[i].style.backgroundColor = "#f15924";
+            gridCards[i].style.backgroundColor = "#F15924";
             gridCards[i].classList.remove("active");
         }
     }

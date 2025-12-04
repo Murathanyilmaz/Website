@@ -7,6 +7,13 @@
     border-radius: 9px;
 }
 
+.fetching {
+    text-align: center;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
+    padding-top: 2px;
+    color: #f15924;
+}
+
 .jumble {
     margin: auto;
 }
@@ -21,7 +28,7 @@
     /*text-transform: uppercase;*/
 }
 
-.harfler {
+.letters {
     margin-bottom: 4px;
     width: 1.5rem;
     height: 2.5rem;
@@ -33,7 +40,7 @@
     cursor: pointer;
 }
 
-.harfler2 {
+.letters2 {
     width: 2rem;
     height: 2.5rem;
     font-size: 10pt;
@@ -44,7 +51,7 @@
     cursor: pointer;
 }
 
-.keyboard {
+.jumbleKeyboard {
     margin-top: 20px;
     text-align: center;
 }

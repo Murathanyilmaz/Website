@@ -3,14 +3,14 @@ const container = document.querySelector('.threeJS-area');
 
 const scene = new THREE.Scene();
 const loader = new THREE.GLTFLoader();
-scene.background = new THREE.Color(0x87ceeb);
+scene.background = new THREE.Color(0x101010);
 const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 10);//FOV-ASPECT-NEAR-FAR
 camera.position.z = 3;
 //CLEAN BACKGROUND
 const renderer = new THREE.WebGLRenderer({
     alpha: true
 });
-scene.background = null;
+//scene.background = null;
 //SCREEN SIZE
 renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
 document.querySelector('.threeJS-area').appendChild(renderer.domElement);

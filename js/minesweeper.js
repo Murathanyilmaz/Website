@@ -4,7 +4,6 @@ let gridSize = Math.sqrt(fieldSize);
 let mineCount = 10;
 let mineButtons = [];
 let mineButtonsGrid = [];
-let fieldCreated = false;
 let grid = [];
 let order = [];
 let shuffled = [];
@@ -15,9 +14,12 @@ let openedCoords = [];
 let tempCoords = [];
 let won = false;
 
+function CreateMinesweeperGame () {
+    CreateMinefield();
+    SetGame();
+}
+
 function CreateMinefield() {
-    if (fieldCreated) return;
-    fieldCreated = true;
     for (let i = 0; i < 81; i++) {
         const mineButton = document.createElement("button");
         mineButton.className = "mine";
@@ -34,7 +36,6 @@ function CreateMinefield() {
         });
     });
 }
-CreateMinefield();
 
 function Restart() {
     popped = false;
@@ -50,7 +51,6 @@ function Restart() {
     document.querySelectorAll('.minefield').forEach(parent => {
         parent.querySelectorAll('button, br').forEach(node => node.remove());
     });
-    fieldCreated = false;
     CreateMinefield();
     SetGame();
 }
@@ -105,7 +105,7 @@ function Minesweeper_Button(value) {
     }
 }
 
-function SetTexs() {
+function SetMineTexs() {
     for (let i = 0; i < order.length; i++) {
         let div = Math.floor(i / gridSize);
         let mod = i % gridSize;
@@ -279,12 +279,11 @@ function SetGame() {
         mineButtonsGrid[div][mod].innerHTML = "&nbsp";
         mineButtonsGrid[div][mod].style.fontSize = "16px";
     }
-    //ShowGrid();
-    SetTexs();
+    //ShowMineGrid();
+    SetMineTexs();
 }
-SetGame();
 
-function ShowGrid() {
+function ShowMineGrid() {
     for (let i = 0; i < gridSize; i++) {
         console.log(i + ":" + grid[i]);
     }

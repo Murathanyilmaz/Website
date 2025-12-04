@@ -12,9 +12,12 @@ const gridPuzzleButton = document.getElementById("gridPuzzleButton");
 const minesweeperButton = document.getElementById("minesweeperButton");
 const threeJSButton = document.getElementById("threeJSButton");
 
-let lastSection;
+let lastSection = "aboutme";
 let inJS = false;
 let jsSection = "gridPuzzle";
+
+let wordJumbleLoaded = false;
+let minesweeperLoaded = false;
 
 function dropDownFunction() {
     document.getElementById("jsDropdown").classList.toggle("show");
@@ -67,10 +70,8 @@ function show(section) {
         const el = document.querySelector("." + name);
         el.classList.toggle("hidden", name !== section)
         if (section == "diceCounter") {
-            console.log(name);
             document.querySelector(".diceCounterDesc").classList.toggle("hidden", false);
         }
-        console.log(name);
         const button = document.querySelector("#" + name + "Button");
         if (name != "diceCounterDesc") {
             button.classList.toggle("active", name === section);
@@ -86,8 +87,19 @@ function show(section) {
             }, index * 500);
         });
     }
+    else if (section == "wordJumble") {
+        if (!wordJumbleLoaded) {
+            wordJumbleLoaded = true;
+            console.log("Creating Jumble Game");
+            CreateWordJumble();
+        }
+    }
     else if (section == "minesweeper") {
-        CreateMinefield();
+        if (!minesweeperLoaded) {
+            minesweeperLoaded = true;
+            console.log("Creating Minesweeper Game");
+            CreateMinesweeperGame();
+        }
     }
 }
 
@@ -128,7 +140,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const aboutEl = document.querySelector('.aboutme');
     const paragraphs = aboutEl.querySelectorAll('p');
     aboutEl.classList.add('visible');
-    lastSection = "aboutme";
     setTimeout(() => {
         paragraphs.forEach((p, index) => {
             setTimeout(() => {
