@@ -20,7 +20,6 @@ function RestartGridPuzzle () {
     });
     phase = 0;
     states.fill(true);
-    console.log(states);
     CreatePuzzle();
     UpdateGrid();
     gridCards.forEach(el => {
