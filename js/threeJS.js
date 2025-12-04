@@ -1,6 +1,6 @@
 const scene = new THREE.Scene();
 const loader = new THREE.GLTFLoader();
-
+const textureLoader = new THREE.TextureLoader();
 const container = document.querySelector('.threeJS-area');
 
 scene.background = new THREE.Color(0x202020);
@@ -9,7 +9,7 @@ const aspect = 0.60;
 let widthSize = window.innerWidth * scaler;
 let heightSize = aspect * widthSize;
 const camera = new THREE.PerspectiveCamera(90, 1, 0.1, 100);//FOV-ASPECT-NEAR-FAR
-camera.position.z = 5;
+camera.position.z = 10;
 
 /*
 const renderer = new THREE.WebGLRenderer({
@@ -23,35 +23,52 @@ document.querySelector('.threeJS-area').appendChild(renderer.domElement);
 
 //CREATE ROOM
 let walls = [];
-const planeGeo = new THREE.PlaneGeometry(10, 10, 1, 1);
-const planeMat = new THREE.MeshBasicMaterial({ color: 0xAAAAAA });
-const floorMat = new THREE.MeshBasicMaterial({ color: 0x808080 });
-const ceilingMat = new THREE.MeshBasicMaterial({ color: 0x808080 });
-const backWallMat = new THREE.MeshBasicMaterial({ color: 0x505050 });
+const planeGeo = new THREE.PlaneGeometry(20, 20, 1, 1);
+const floorTexture = textureLoader.load('img/icons/gmail.png',
+    function (texture) {
+        const floorMat = new THREE.MeshBasicMaterial({
+            map: texture,
+            color: 0x502020,
+        });
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(20, 30);
+        floor.material = floorMat;
+        console.log('Floor texture loaded successfully!');
+    },
+    undefined,
+    function (err) {
+        console.error('An error occurred loading the texture', err);
+    }
+);
+
+const planeMat = new THREE.MeshBasicMaterial({ color: 0xCCCCAA });
+const ceilingMat = new THREE.MeshBasicMaterial({ color: 0xBBBB99 });
+const backWallMat = new THREE.MeshBasicMaterial({ color: 0x887788 });
 const leftWall = new THREE.Mesh(planeGeo, planeMat);
 const rightWall = new THREE.Mesh(planeGeo, planeMat);
-const floor = new THREE.Mesh(planeGeo, floorMat);
+const floor = new THREE.Mesh(planeGeo);
 const ceiling = new THREE.Mesh(planeGeo, ceilingMat);
 const backWall = new THREE.Mesh(planeGeo, backWallMat);
 leftWall.position.z = -5;
-leftWall.position.x = -5;
+leftWall.position.x = -10;
 leftWall.rotation.y = THREE.MathUtils.degToRad(90);
 leftWall.name = "Wall";
 scene.add(leftWall);
 walls.push(leftWall);
 rightWall.position.z = -5;
-rightWall.position.x = 5;
+rightWall.position.x = 10;
 rightWall.rotation.y = THREE.MathUtils.degToRad(-90);
 rightWall.name = "Wall";
 scene.add(rightWall);
 walls.push(rightWall);
-floor.position.y = -5;
+floor.position.y = -10;
 floor.position.z = -5;
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.name = "Wall";
 scene.add(floor);
 walls.push(floor);
-ceiling.position.y = 5;
+ceiling.position.y = 10;
 ceiling.position.z = -5;
 ceiling.rotation.x = THREE.MathUtils.degToRad(90);
 ceiling.name = "Wall";
@@ -80,12 +97,12 @@ let frameCount = 0;
 let spawnCount = 0;
 let spawnItems = [];
 
-
 //RAYCAST
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 window.addEventListener('click', onMouseClick);
 window.addEventListener("mousemove", onMouseMove);
+window.addEventListener("mouseover", onmouseover);
 
 function CalculateCoords (value) {
     const rect = container.getBoundingClientRect();
@@ -105,12 +122,16 @@ function CalculateCoords (value) {
 function onMouseMove(event) {
     CalculateCoords(event);
     Hover();
-    SpawnAndDestroy();
+    SpawnItem();
+    setTimeout(() => {
+        RemoveItem();
+    }, 500);
+    
 }
 
 function onMouseClick(event) {
     CalculateCoords(event);
-    SpawnAndDestroy();
+    //SpawnItem();
 }
 
 let monkey = null;
@@ -127,21 +148,11 @@ function Hover() {
         canSpawn = false;
     }
 }
-function SpawnAndDestroy() {
-    if (!inTheArea || !canSpawn || !cooldown) return;
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(scene.children, true);
-    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
-    const material = new THREE.MeshBasicMaterial({ color: 0x444444});
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.x = spawnPos.x;
-    cube.position.y = spawnPos.y;
-    cube.position.z = spawnPos.z;
-    cube.name = "Cube";
-    scene.add(cube);
-    spawnItems.push(cube);
-    if (spawnItems.length > 50) {
+
+function RemoveItem () {
+    if (spawnItems.length > 0 || !cooldown) {
         cooldown = false;
+        if (spawnItems[0] == null) return;
         spawnItems[0].traverse((child) => {
             if (child.isMesh) {
                 if (child.geometry) child.geometry.dispose();
@@ -156,8 +167,23 @@ function SpawnAndDestroy() {
         spawnItems.shift();
         setTimeout(() => {
             cooldown = true;
-        }, 10)
+        }, 10);
     }
+}
+
+function SpawnItem() {
+    if (!inTheArea || !canSpawn) return;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+    const material = new THREE.MeshBasicMaterial({ color: 0x444444});
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.x = spawnPos.x;
+    cube.position.y = spawnPos.y;
+    cube.position.z = spawnPos.z;
+    cube.name = "Cube";
+    scene.add(cube);
+    spawnItems.push(cube);
 
     /*if (intersects.length > 0) {
         const firstHit = intersects[0].object;
@@ -231,7 +257,12 @@ function animate() {
     const hue = (frameCount % 200) / 200;
     if (frameCount > 200) frameCount = 0;
     if (monkey) {
-        monkey.rotation.y += 0.01;
+        //monkey.rotation.y += 0.01;
+        monkey.lookAt(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z - 10));
+        monkey.position.x = spawnPos.x;
+        monkey.position.y = spawnPos.y;
+        monkey.position.z = spawnPos.z;
+        latestPos = spawnPos;
         monkey.traverse((child) => {
             if (child.isMesh) {
                 child.material.color.setHSL(hue, 0.5, 0.5);
