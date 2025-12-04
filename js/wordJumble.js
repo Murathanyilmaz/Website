@@ -7,8 +7,8 @@ const dd   = String(today.getDate()).padStart(2, '0');
 const dailyUrl = `https://www.nytimes.com/svc/wordle/v2/${yyyy}-${mm}-${dd}.json`;
 let fixedUrl = 'https://api.allorigins.win/raw?url=' + dailyUrl;
 
-let wordOfTheDay;
-
+let wordOfTheDay;/*
+console.log(fixedUrl);
 fetch(fixedUrl)
 .then(response => {
 if (!response.ok) {
@@ -25,7 +25,8 @@ CreateGame();
 .catch(err => {
 console.error('Error fetching word:', err);
 });
-
+*/
+wordOfTheDay = "TULIP";
 const allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const buttons = ["A", "B", "C", "D", "E", "F", "G", "H", "I","J", "K", "L", "M", "N", "O", "P", "Q", "R", "S","T", "U", "V", "W", "X", "Y", "Z"];

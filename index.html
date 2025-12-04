@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Murathan Yılmaz</title>
-
     <link href="css/diceCounter.css" rel="stylesheet" />
     <link href="css/wordJumble.css" rel="stylesheet" />
     <link href="css/memoryCards.css" rel="stylesheet" />
@@ -51,11 +50,16 @@
                 <span class="separator">|</span>
                 <a href="#diceCounter" class="nav_button" id="diceCounterButton">Dice Game</a>
                 <span class="separator">|</span>
-                <a href="#comingSoon" class="nav_button" id="comingSoonButton">Coming Soon...</a>
+                <a href="#threeJS" class="nav_button" id="threeJSButton">Three.js Tests</a>
             </div>
         </nav>
     </header>
     <main class="content">
+        <div class="threeJS hidden">
+            <div class="description"><h4>Three.js Sandbox</h4></div>
+            <div class="threeJS-area">
+            </div>
+        </div>
         <div class="snapchat hidden">
             <h3>
                 <font color="#ffffff">Made with
@@ -410,11 +414,14 @@
         <img class="lightbox-img" src="" alt="Portfolio Image">
     </div>
     </footer>
-    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="js/wordJumble.js"></script>
     <script src="js/diceCounter.js"></script>
     <script src="js/memoryCards.js"></script>
     <script src="js/gridPuzzle.js"></script>
     <script src="js/minesweeper.js"></script>
+    <script src="js/threeJS_test.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

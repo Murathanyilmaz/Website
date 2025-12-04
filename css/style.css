@@ -23,6 +23,13 @@ main {
     margin-top: 5px;
 }
 
+canvas {
+    display: block;
+    margin: 0 auto;
+    /*background-color: transparent !important;*/
+    /*position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);*/
+}
+
 .navigation {
     vertical-align: middle;
     text-align: center;

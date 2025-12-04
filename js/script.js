@@ -10,6 +10,7 @@ const diceCounterButton = document.getElementById("diceCounterButton");
 const memoryCardsButton = document.getElementById("memoryCardsButton");
 const gridPuzzleButton = document.getElementById("gridPuzzleButton");
 const minesweeperButton = document.getElementById("minesweeperButton");
+const threeJSButton = document.getElementById("threeJSButton");
 
 let lastSection;
 let inJS = false;
@@ -37,7 +38,8 @@ const sections = [
     "diceCounter",
     "diceCounterDesc",
     "gridPuzzle",
-    "minesweeper"
+    "minesweeper",
+    "threeJS"
 ];
 
 function show(section) {
@@ -67,6 +69,7 @@ function show(section) {
             console.log(name);
             document.querySelector(".diceCounterDesc").classList.toggle("hidden", false);
         }
+        console.log(name);
         const button = document.querySelector("#" + name + "Button");
         if (name != "diceCounterDesc") {
             button.classList.toggle("active", name === section);
@@ -97,6 +100,7 @@ diceCounterButton.onclick = () => show("diceCounter");
 memoryCardsButton.onclick = () => show("memoryCards");
 gridPuzzleButton.onclick = () => show("gridPuzzle");
 minesweeperButton.onclick = () => show("minesweeper");
+threeJSButton.onclick = () => show("threeJS");
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');
