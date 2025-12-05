@@ -8,7 +8,7 @@ const scaler = 0.6;
 let widthSize = window.innerWidth * scaler;
 let heightSize = widthSize * 0.6;
 let aspect = widthSize/heightSize;
-const camera = new THREE.PerspectiveCamera(90, aspect, 0.1, 100);//FOV-ASPECT-NEAR-FAR
+const camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 100);//FOV-ASPECT-NEAR-FAR
 camera.position.z = 0;
 /*
 const renderer = new THREE.WebGLRenderer({
@@ -47,27 +47,34 @@ const rightWall = new THREE.Mesh(planeGeo, planeMat);
 const floor = new THREE.Mesh(planeGeo);
 const ceiling = new THREE.Mesh(planeGeo, ceilingMat);
 const backWall = new THREE.Mesh(planeGeo, backWallMat);
-leftWall.position.z = -15;
-leftWall.position.x = -10;
+leftWall.position.z = -30;
+leftWall.position.x = -20;
+leftWall.scale.y = 1;
 leftWall.rotation.y = THREE.MathUtils.degToRad(90);
 leftWall.name = "Wall";
 scene.add(leftWall);
-rightWall.position.z = -15;
-rightWall.position.x = 10;
+rightWall.position.z = -30;
+rightWall.position.x = 20;
 rightWall.rotation.y = THREE.MathUtils.degToRad(-90);
 rightWall.name = "Wall";
 scene.add(rightWall);
-floor.position.y = -8;
-floor.position.z = -15;
+floor.position.y = -10;
+floor.position.z = -30;
+floor.scale.x = 3;
+floor.scale.y = 3;
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.name = "Wall";
 scene.add(floor);
-ceiling.position.y = 8;
-ceiling.position.z = -15;
+ceiling.position.y = 10;
+ceiling.position.z = -30;
+ceiling.scale.x = 3;
+ceiling.scale.y = 3;
 ceiling.rotation.x = THREE.MathUtils.degToRad(90);
 ceiling.name = "Wall";
 scene.add(ceiling);
-backWall.position.z = -15;
+backWall.position.z = -40;
+backWall.scale.x = 2.5;
+backWall.scale.y = 1.25 ;
 backWall.name = "Wall";
 scene.add(backWall);
 
@@ -81,7 +88,7 @@ scene.add(directionalLight);
 //directionalLight.target.position.set(0, 0, 0); //Default
 //scene.add(directionalLight.target); // Need to add the target if you change its position
 
-let spawnPos = new THREE.Vector3(0, 0, -10);
+let spawnPos = new THREE.Vector3(0, 0, -30);
 let inTheArea = false;
 let canSpawn = false;
 let cooldown = true;
@@ -156,7 +163,7 @@ function MoveMonkey () {
     let rand2 = (Math.random() * 16) - 8;
     monkey.position.x = rand1;
     monkey.position.y = rand2;
-    monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 8));
+    monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, -25));
     ateCount += 10;
     setTimeout(() => {
         eaten = false;
@@ -171,7 +178,7 @@ function SpawnItem() {
     }, 5);
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
-    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+    const geometry = new THREE.SphereGeometry(1, 16, 16);
     const material = new THREE.MeshStandardMaterial({ color: 0x444444});
     const cube = new THREE.Mesh(geometry, material);
     cube.position.x = spawnPos.x;
@@ -206,10 +213,10 @@ loader.load(
     'models/hat.glb', 
     function (gltf) {
         const model = gltf.scene; 
-        model.scale.set(0.5, 0.5, 0.5);
+        model.scale.set(0.75, 0.75, 0.75);
         model.position.x = 0;
         model.position.y = 0;
-        model.position.z = -10;
+        model.position.z = -30;
         scene.add(model);
         monkey = model;
         const testMat = new THREE.MeshStandardMaterial({ color: 0x707070});
@@ -255,7 +262,7 @@ function animateJS() {
     if (frameCount > 200) frameCount = 0;
     if (monkey) {
         //monkey.rotation.y += 0.01;
-        monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 8));
+        monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, -25));
         /*monkey.position.x = spawnPos.x;
         monkey.position.y = spawnPos.y;
         monkey.position.z = spawnPos.z;*/
@@ -285,14 +292,12 @@ function animateJS() {
     camera.aspect = aspect
     renderer.setSize(widthSize, heightSize);
     renderer.render(scene, camera);
-    camera.position.x = spawnPos.x / 50;
+    /*camera.position.x = spawnPos.x / 50;
     camera.position.y = spawnPos.y / 50;
     camera.rotation.x = spawnPos.y / 90;
-    camera.rotation.y = -spawnPos.x / 90;
+    camera.rotation.y = -spawnPos.x / 90;*/
     camera.updateProjectionMatrix();
 }
-jsSection = "snake3D";
-animateJS();
 
 function DisposeScene(scene) {
     scene.traverse((object) => {
