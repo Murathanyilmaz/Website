@@ -10,13 +10,11 @@ let widthSize = window.innerWidth * scaler;
 let heightSize = aspect * widthSize;
 const camera = new THREE.PerspectiveCamera(90, 1, 0.1, 100);//FOV-ASPECT-NEAR-FAR
 camera.position.z = 10;
-
 /*
 const renderer = new THREE.WebGLRenderer({
     alpha: true
 });
 scene.background = null;*/
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(widthSize, heightSize);
 document.querySelector('.threeJS-area').appendChild(renderer.domElement);
@@ -83,8 +81,8 @@ walls.push(backWall);
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
-directionalLight.position.set(5, 5, 5); 
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(0, 10, 5); 
 scene.add(directionalLight);
 //directionalLight.target.position.set(0, 0, 0); //Default
 //scene.add(directionalLight.target); // Need to add the target if you change its position
@@ -96,6 +94,9 @@ let cooldown = true;
 let frameCount = 0;
 let spawnCount = 0;
 let spawnItems = [];
+let monkey = null;
+let eaten = false;
+let ateCount = 0;
 
 //RAYCAST
 const raycaster = new THREE.Raycaster();
@@ -123,22 +124,19 @@ function onMouseMove(event) {
     CalculateCoords(event);
     Hover();
     SpawnItem();
-    setTimeout(() => {
+    /*setTimeout(() => {
         RemoveItem();
-    }, 500);
-    
+    }, 500);*/
 }
 
 function onMouseClick(event) {
     CalculateCoords(event);
-    //SpawnItem();
 }
 
-let monkey = null;
 function Hover() {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(walls, true);
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && inTheArea) {
         //const hitObject = intersects[0].object;
         canSpawn = true;
         container.style.cursor = 'pointer';
@@ -149,9 +147,36 @@ function Hover() {
     }
 }
 
-function RemoveItem () {
-    if (spawnItems.length > 0 || !cooldown) {
-        cooldown = false;
+function MoveMonkey () {
+    let rand1 = (Math.random() * 16) - 8;
+    let rand2 = (Math.random() * 16) - 8;
+    monkey.position.x = rand1;
+    monkey.position.y = rand2;
+    monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 10));
+    ateCount += 10;
+    setTimeout(() => {
+        eaten = false;
+    }, 100);
+}
+
+function SpawnItem() {
+    if (!inTheArea || !canSpawn || !cooldown) return;
+    cooldown = false;
+    setTimeout(() => {
+        cooldown = true;
+    }, 5);
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0x444444});
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.x = spawnPos.x;
+    cube.position.y = spawnPos.y;
+    cube.position.z = spawnPos.z;
+    cube.name = "Cube";
+    scene.add(cube);
+    spawnItems.push(cube);
+    if (spawnItems.length > ateCount + 10) {
         if (spawnItems[0] == null) return;
         spawnItems[0].traverse((child) => {
             if (child.isMesh) {
@@ -165,68 +190,7 @@ function RemoveItem () {
         });
         scene.remove(spawnItems[0]);
         spawnItems.shift();
-        setTimeout(() => {
-            cooldown = true;
-        }, 10);
     }
-}
-
-function SpawnItem() {
-    if (!inTheArea || !canSpawn) return;
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(scene.children, true);
-    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
-    const material = new THREE.MeshBasicMaterial({ color: 0x444444});
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.x = spawnPos.x;
-    cube.position.y = spawnPos.y;
-    cube.position.z = spawnPos.z;
-    cube.name = "Cube";
-    scene.add(cube);
-    spawnItems.push(cube);
-
-    /*if (intersects.length > 0) {
-        const firstHit = intersects[0].object;
-        let objectToRemove = null;
-
-        if (firstHit === cube) {
-            console.log("Cube Clicked!");
-            objectToRemove = cube;
-        }
-
-        let currentParent = firstHit;
-        while (currentParent) {
-            if (currentParent === monkey) {
-                console.log("Monkey Model Clicked!");
-                objectToRemove = monkey;
-                break;
-            }
-            currentParent = currentParent.parent;
-        }
-        
-        // --- Deletion Logic ---
-        if (objectToRemove) {
-            // Traverse and dispose resources (memory cleanup)
-            objectToRemove.traverse((child) => {
-                if (child.isMesh) {
-                    if (child.geometry) child.geometry.dispose();
-                    if (Array.isArray(child.material)) {
-                        child.material.forEach(m => m.dispose());
-                    } else if (child.material) {
-                        child.material.dispose();
-                    }
-                }
-            });
-
-            // Remove the object from the scene
-            scene.remove(objectToRemove);
-            
-            // If the monkey was removed, set the global reference to null
-            if (objectToRemove === monkey) {
-                monkey = null;
-            }
-        }
-    }*/
 }
 
 //LOAD MODEL
@@ -235,11 +199,17 @@ loader.load(
     function (gltf) {
         const model = gltf.scene; 
         model.scale.set(0.5, 0.5, 0.5);
-        model.position.x = -3;
-        model.position.y = 3;
-        model.position.z = -5;
+        model.position.x = 0;
+        model.position.y = 0;
+        model.position.z = -3;
         scene.add(model);
         monkey = model;
+        const testMat = new THREE.MeshStandardMaterial({ color: 0x707070});
+        monkey.traverse((child) => {
+            if (child.isMesh) {
+                child.material = testMat;
+            }
+        });
     },
     function (xhr) {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -258,19 +228,28 @@ function animate() {
     if (frameCount > 200) frameCount = 0;
     if (monkey) {
         //monkey.rotation.y += 0.01;
-        monkey.lookAt(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z - 10));
-        monkey.position.x = spawnPos.x;
+        monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 10));
+        /*monkey.position.x = spawnPos.x;
         monkey.position.y = spawnPos.y;
-        monkey.position.z = spawnPos.z;
-        latestPos = spawnPos;
+        monkey.position.z = spawnPos.z;*/
         monkey.traverse((child) => {
             if (child.isMesh) {
-                child.material.color.setHSL(hue, 0.5, 0.5);
+                child.material.color.setHSL(hue, 1, 0.2);
             }
         });
     }
+
+    if (monkey) {
+        if (eaten) return;
+        let distance = spawnPos.distanceTo(monkey.position);
+        if (distance < 1 && inTheArea) {
+            eaten = true;
+            MoveMonkey();
+            console.log("Here");
+        }
+    }
     spawnItems.forEach((el, i) => {
-        el.material.color.setHSL(hue + (i / spawnItems.length) , 0.5, 0.5);
+        el.material.color.setHSL(hue + (i / spawnItems.length) , 0.8, 0.4);
     })
     widthSize = window.innerWidth * scaler;
     heightSize = aspect * widthSize;
