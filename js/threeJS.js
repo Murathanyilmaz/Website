@@ -5,11 +5,11 @@ const container = document.querySelector('.threeJS-area-1');
 
 scene.background = new THREE.Color(0x505050);
 const scaler = 0.6;
-const aspect = 0.60;
 let widthSize = window.innerWidth * scaler;
-let heightSize = aspect * widthSize;
-const camera = new THREE.PerspectiveCamera(90, 1, 0.1, 100);//FOV-ASPECT-NEAR-FAR
-camera.position.z = 10;
+let heightSize = widthSize * 0.6;
+let aspect = widthSize/heightSize;
+const camera = new THREE.PerspectiveCamera(90, aspect, 0.1, 100);//FOV-ASPECT-NEAR-FAR
+camera.position.z = 0;
 /*
 const renderer = new THREE.WebGLRenderer({
     alpha: true
@@ -47,27 +47,27 @@ const rightWall = new THREE.Mesh(planeGeo, planeMat);
 const floor = new THREE.Mesh(planeGeo);
 const ceiling = new THREE.Mesh(planeGeo, ceilingMat);
 const backWall = new THREE.Mesh(planeGeo, backWallMat);
-leftWall.position.z = -5;
+leftWall.position.z = -15;
 leftWall.position.x = -10;
 leftWall.rotation.y = THREE.MathUtils.degToRad(90);
 leftWall.name = "Wall";
 scene.add(leftWall);
-rightWall.position.z = -5;
+rightWall.position.z = -15;
 rightWall.position.x = 10;
 rightWall.rotation.y = THREE.MathUtils.degToRad(-90);
 rightWall.name = "Wall";
 scene.add(rightWall);
-floor.position.y = -10;
-floor.position.z = -5;
+floor.position.y = -8;
+floor.position.z = -15;
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.name = "Wall";
 scene.add(floor);
-ceiling.position.y = 10;
-ceiling.position.z = -5;
+ceiling.position.y = 8;
+ceiling.position.z = -15;
 ceiling.rotation.x = THREE.MathUtils.degToRad(90);
 ceiling.name = "Wall";
 scene.add(ceiling);
-backWall.position.z = -10;
+backWall.position.z = -15;
 backWall.name = "Wall";
 scene.add(backWall);
 
@@ -81,7 +81,7 @@ scene.add(directionalLight);
 //directionalLight.target.position.set(0, 0, 0); //Default
 //scene.add(directionalLight.target); // Need to add the target if you change its position
 
-let spawnPos = new THREE.Vector3(0, 0, -3);
+let spawnPos = new THREE.Vector3(0, 0, -10);
 let inTheArea = false;
 let canSpawn = false;
 let cooldown = true;
@@ -99,14 +99,20 @@ const mouse = new THREE.Vector2();
 //window.addEventListener('click', onMouseClick);
 window.addEventListener("mousemove", onMouseMove);
 
+const fov = camera.fov;
+const dis = -spawnPos.z;
+const fovRad = THREE.MathUtils.degToRad(fov);
+const scaleY = dis * Math.tan(fovRad / 2);
+const scaleX = scaleY * aspect;
+
 function CalculateCoords (value) {
     const rect = container.getBoundingClientRect();
     const clientX_relative = value.clientX - rect.left; 
     const clientY_relative = value.clientY - rect.top;
     mouse.x = ((clientX_relative / rect.width) *  2 - 1) / scaler; 
-    mouse.y = -(clientY_relative / rect.height) * 2 + 1;
-    spawnPos.x = mouse.x * -(spawnPos.z - camera.position.z);
-    spawnPos.y = mouse.y * -(spawnPos.z - camera.position.z);
+    mouse.y = (-(clientY_relative / rect.height) * 2 + 1);
+    spawnPos.x = mouse.x * scaleX;
+    spawnPos.y = mouse.y * scaleY;
     /*if (spawnPos.x < -8) spawnPos.x += 16;
     else if (spawnPos.x > 8) spawnPos.x -= 16;
     if (spawnPos.y < -8) spawnPos.y += 16;
@@ -150,7 +156,7 @@ function MoveMonkey () {
     let rand2 = (Math.random() * 16) - 8;
     monkey.position.x = rand1;
     monkey.position.y = rand2;
-    monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 10));
+    monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 8));
     ateCount += 10;
     setTimeout(() => {
         eaten = false;
@@ -203,7 +209,7 @@ loader.load(
         model.scale.set(0.5, 0.5, 0.5);
         model.position.x = 0;
         model.position.y = 0;
-        model.position.z = -3;
+        model.position.z = -10;
         scene.add(model);
         monkey = model;
         const testMat = new THREE.MeshStandardMaterial({ color: 0x707070});
@@ -249,7 +255,7 @@ function animateJS() {
     if (frameCount > 200) frameCount = 0;
     if (monkey) {
         //monkey.rotation.y += 0.01;
-        monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 10));
+        monkey.lookAt(new THREE.Vector3(spawnPos.x, spawnPos.y, camera.position.z - 8));
         /*monkey.position.x = spawnPos.x;
         monkey.position.y = spawnPos.y;
         monkey.position.z = spawnPos.z;*/
@@ -266,22 +272,27 @@ function animateJS() {
         if (distance < 1 && inTheArea) {
             eaten = true;
             MoveMonkey();
-            console.log("Here");
         }
     }
     spawnItems.forEach((el, i) => {
         el.material.color.setHSL(hue + (i / spawnItems.length) , 0.8, 0.4);
     })
+    //widthSize = window.innerWidth * scaler;
+    //heightSize = aspect * widthSize;
     widthSize = window.innerWidth * scaler;
-    heightSize = aspect * widthSize;
+    heightSize = widthSize * 0.6;
+    aspect = widthSize/heightSize;
+    camera.aspect = aspect
     renderer.setSize(widthSize, heightSize);
     renderer.render(scene, camera);
-    /*camera.position.x = spawnPos.x / 50;
+    camera.position.x = spawnPos.x / 50;
     camera.position.y = spawnPos.y / 50;
     camera.rotation.x = spawnPos.y / 90;
-    camera.rotation.y = -spawnPos.x / 90;*/
+    camera.rotation.y = -spawnPos.x / 90;
+    camera.updateProjectionMatrix();
 }
-
+jsSection = "snake3D";
+animateJS();
 
 function DisposeScene(scene) {
     scene.traverse((object) => {
