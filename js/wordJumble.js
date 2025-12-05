@@ -29,7 +29,7 @@ function CreateWordJumble () {
     })
     .catch(err => {
         console.error('Error fetching word:', err);
-        document.querySelector(".fetching").innerHTML = "API Error.";
+        document.querySelector(".fetching").innerHTML = "API Error. Try reloading the page.";
         document.querySelector(".fetching").style.color = "#e92424ff";
     });
 }

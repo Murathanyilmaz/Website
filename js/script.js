@@ -84,8 +84,14 @@ function ShowSection (section) {
     }
     else {
         Stop3D_Scene();
-        DisposeScene(snake3dScene);
-        RemoveEventListeners();
+        //DisposeScene(snake3dScene);
+        //RemoveEventListeners();
+    }
+    if (section == "WIP") {
+        //StartSnakeGame();
+    }
+    else {
+        //StopSnakeGame();
     }
 }
 

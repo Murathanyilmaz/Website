@@ -287,7 +287,7 @@ function animateJS() {
     //widthSize = window.innerWidth * scaler;
     //heightSize = aspect * widthSize;
     widthSize = window.innerWidth * scaler;
-    heightSize = widthSize * 0.6;
+    heightSize = widthSize * scaler;
     aspect = widthSize/heightSize;
     camera.aspect = aspect
     renderer.setSize(widthSize, heightSize);
