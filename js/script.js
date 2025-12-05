@@ -40,8 +40,9 @@ function ShowSection (section) {
         section != "rollTheDice" &&
         section != "memoryCards" &&
         section != "gridPuzzle" &&
-        section != "minesweeper"&&
-        section != "threeJS") {
+        section != "minesweeper" &&
+        section != "snake3D" &&
+        section != "WIP") {
         dropDownFunction2();
         inJS = false;
     }
@@ -77,6 +78,14 @@ function ShowSection (section) {
             gridPuzzleLoaded = true;
             CreateGridPuzzle();
         }
+    }
+    if (section == "snake3D") {
+        Start3D_Scene();
+    }
+    else {
+        Stop3D_Scene();
+        DisposeScene(snake3dScene);
+        RemoveEventListeners();
     }
 }
 
