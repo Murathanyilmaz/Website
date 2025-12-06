@@ -7,8 +7,8 @@ navButtons.forEach((el, i) => {
 });
 
 let lastSection = "aboutme";
-let inJS = false;
 let jsSection = "gridPuzzle";
+let inJS = false;
 
 let wordJumbleLoaded = false;
 let minesweeperLoaded = false;
@@ -26,16 +26,13 @@ function dropDownFunction2() {
 }
 
 function ShowSection (section) {
+    if (lastSection == section) return;
     if (section == "javaScript") {
         if (inJS) return;
         inJS = true;
         dropDownFunction();
         section = jsSection;
     }
-    if (lastSection == section) return;
-    document.querySelector("." + lastSection).classList.toggle("hidden", true);
-    document.querySelector("#" + lastSection + "Button").classList.toggle("active", false);
-    lastSection = section;
     if (section != "wordJumble" &&
         section != "rollTheDice" &&
         section != "memoryCards" &&
@@ -49,8 +46,6 @@ function ShowSection (section) {
     else {
         jsSection = section;
     }
-    document.querySelector("." + lastSection).classList.toggle("hidden", false);
-    document.querySelector("#" + lastSection + "Button").classList.toggle("active", true);
     if (section == "aboutme") {
         document.querySelector('.aboutme').classList.add('visible');
         const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
@@ -79,20 +74,25 @@ function ShowSection (section) {
             CreateGridPuzzle();
         }
     }
-    if (section == "snake3D") {
+    else if (section == "snake3D") {
         Start3D_Scene();
     }
-    else {
+    else if (section == "WIP") {
+        //StartSnakeGame();
+    }
+    document.querySelector("." + lastSection).classList.toggle("hidden", true);
+    document.querySelector("#" + lastSection + "Button").classList.toggle("active", false);
+    if (lastSection == "snake3D") {
         Stop3D_Scene();
         //DisposeScene(snake3dScene);
         //RemoveEventListeners();
     }
-    if (section == "WIP") {
-        //StartSnakeGame();
+    else if (lastSection == "WIP") {
+        StopSnakeGame();
     }
-    else {
-        //StopSnakeGame();
-    }
+    lastSection = section;
+    document.querySelector("." + lastSection).classList.toggle("hidden", false);
+    document.querySelector("#" + lastSection + "Button").classList.toggle("active", true);
 }
 
 const lightbox = document.getElementById('lightbox');
