@@ -21,6 +21,8 @@ main {
 .icon {
     text-align: center;
     margin-top: 5px;
+    perspective: 20px;
+    /*transition: 0.5s ease-in;*/
 }
 
 canvas {

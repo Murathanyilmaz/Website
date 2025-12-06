@@ -135,3 +135,10 @@ document.addEventListener('keydown', (event) => {
        lightbox.classList.add('hidden');
     }
 });
+
+document.addEventListener("mousemove", (event) => {
+    let mousePosX = 1 - (2 * (window.innerWidth - event.clientX) / window.innerWidth);
+    let mousePosY = event.clientY / window.innerHeight;
+    const icon = document.querySelector(".icon");
+    icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
+});
