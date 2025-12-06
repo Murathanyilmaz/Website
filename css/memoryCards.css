@@ -1,0 +1,26 @@
+@import url('https://fonts.cdnfonts.com/css/morpheus');
+
+.memoryCards {
+    font-family: 'Morpheus', sans-serif;
+    text-align: center;
+}
+
+.memoryCards table {
+    margin: auto;
+}
+
+.memoryCards button {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    background-color: #f15924;
+    border-radius: 5%;
+    transition-duration: 0.3s;
+}
+
+.blackWhite {
+    /*-webkit-filter: grayscale(100%);*/
+    filter: grayscale(100%);
+
+}

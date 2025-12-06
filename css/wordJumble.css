@@ -1,0 +1,57 @@
+.wordJumble {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    /*background: linear-gradient(to bottom, #e48c69, #f59baa);*/
+    padding-bottom: 10px;
+    padding-top: 1px;
+    border-radius: 9px;
+}
+
+.fetching {
+    text-align: center;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
+    padding-top: 2px;
+    color: #f15924;
+}
+
+.jumble {
+    margin: auto;
+}
+
+.jumble td {
+    width: 7vh;
+    height: 7vh;
+    border: 3px #222 solid;
+    font-size: 40px;
+    text-align: center;
+    pointer-events: none;
+    /*text-transform: uppercase;*/
+}
+
+.letters {
+    margin-bottom: 4px;
+    width: 1.5rem;
+    height: 2.5rem;
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.letters2 {
+    width: 2rem;
+    height: 2.5rem;
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.jumbleKeyboard {
+    margin-top: 20px;
+    text-align: center;
+}
