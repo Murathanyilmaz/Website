@@ -1,17 +1,17 @@
 "use strict"
 const gameCards = document.querySelectorAll(".gameCard");
-const cardType0 = `<img height="100px" src="img/classes/warricon.jpg"/>`
-const cardType1 = `<img height="100px" src="img/classes/mageicon.jpg"/>`
-const cardType2 = `<img height="100px" src="img/classes/dkicon.jpg"/>`
-const cardType3 = `<img height="100px" src="img/classes/dhicon.jpg"/>`
-const cardType4 = `<img height="100px" src="img/classes/druicon.jpg"/>`
-const cardType5 = `<img height="100px" src="img/classes/priicon.jpg"/>`
-const cardType6 = `<img height="100px" src="img/classes/palaicon.jpg"/>`
-const cardType7 = `<img height="100px" src="img/classes/warlicon.jpg"/>`
-const cardType8 = `<img height="100px" src="img/classes/rogicon.jpg"/>`
-const cardType9 = `<img height="100px" src="img/classes/hunticon.jpg"/>`
-const cardType10 = `<img height="100px" src="img/classes/monkicon.jpg"/>`
-const cardType11 = `<img height="100px" src="img/classes/shaicon.jpg"/>`
+const cardType0 = `<img height="100px" src="../img/classes/warricon.jpg"/>`
+const cardType1 = `<img height="100px" src="../img/classes/mageicon.jpg"/>`
+const cardType2 = `<img height="100px" src="../img/classes/dkicon.jpg"/>`
+const cardType3 = `<img height="100px" src="../img/classes/dhicon.jpg"/>`
+const cardType4 = `<img height="100px" src="../img/classes/druicon.jpg"/>`
+const cardType5 = `<img height="100px" src="../img/classes/priicon.jpg"/>`
+const cardType6 = `<img height="100px" src="../img/classes/palaicon.jpg"/>`
+const cardType7 = `<img height="100px" src="../img/classes/warlicon.jpg"/>`
+const cardType8 = `<img height="100px" src="../img/classes/rogicon.jpg"/>`
+const cardType9 = `<img height="100px" src="../img/classes/hunticon.jpg"/>`
+const cardType10 = `<img height="100px" src="../img/classes/monkicon.jpg"/>`
+const cardType11 = `<img height="100px" src="../img/classes/shaicon.jpg"/>`
 var selectedCard1, selectedCard2, selectedCard1Index, selectedCard2Index;
 var counter = 0;
 var playable = true;
