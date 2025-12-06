@@ -21,7 +21,7 @@ container.appendChild(renderer.domElement);
 
 //CREATE ROOM
 const planeGeo = new THREE.PlaneGeometry(20, 20, 1, 1);
-const floorTexture = textureLoader.load('img/icons/gmail.png',
+const floorTexture = textureLoader.load('../img/icons/gmail.png',
     function (texture) {
         const floorMat = new THREE.MeshBasicMaterial({
             map: texture,
