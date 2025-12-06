@@ -13,6 +13,7 @@ let inJS = false;
 let wordJumbleLoaded = false;
 let minesweeperLoaded = false;
 let gridPuzzleLoaded = false;
+let memoryCardsLoaded = false;
 
 function dropDownFunction() {
     document.getElementById("jsDropdown").classList.toggle("show");
@@ -72,6 +73,12 @@ function ShowSection (section) {
         if (!gridPuzzleLoaded) {
             gridPuzzleLoaded = true;
             CreateGridPuzzle();
+        }
+    }
+    else if (section == "memoryCards") {
+        if (!memoryCardsLoaded) {
+            memoryCardsLoaded = true;
+            CreateMemoryGame();
         }
     }
     else if (section == "snake3D") {

@@ -63,20 +63,13 @@ let ShowFace = function (cardNumber) {
 //style background = image so there can be transition duration from css.
 
 function CreateMemoryGame() {
-    const memoryGameTable = document.createElement("table");
-    memoryGameArea.appendChild(memoryGameTable);
-    for (let i = 0; i < 4; i++) {
-        const tr = document.createElement("tr");
-        memoryGameTable.appendChild(tr);
-        for (let j = 0; j < 6; j++) {
-            const td = document.createElement("td");
-            tr.appendChild(td);
-            const button = document.createElement("button");
-            button.className = "memoryCard";
-            td.appendChild(button);
-            memoryCards.push(button);
-        }
+    for (let i = 0; i < 24; i++) {
+        const button = document.createElement("button");
+        button.className = "memoryCard";
+        memoryGameArea.appendChild(button);
+        memoryCards.push(button);
     }
+
     memoryCards.forEach(function (value, index) {
         value.addEventListener("click", function () {
             if (playable) {
@@ -134,4 +127,3 @@ function CreateMemoryGame() {
         imageArray.splice(rand, 1);
     }
 }
-CreateMemoryGame();
