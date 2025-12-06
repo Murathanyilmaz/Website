@@ -18,7 +18,7 @@ rollDice.addEventListener("click", () => {
         current = turn % 2 == 0 ? 0 : 1;
         currentEl = document.getElementById(`current--${current}`);
         diceResult = Math.trunc(Math.random() * 6) + 1;
-        diceEl.src = `img/dice/dice-${diceResult}.png`;
+        diceEl.src = `../img/dice/dice-${diceResult}.png`;
         diceEl.classList.remove("hidden");
         if (diceResult != 1) {
             currentScore += diceResult;

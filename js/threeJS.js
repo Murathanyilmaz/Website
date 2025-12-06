@@ -210,7 +210,7 @@ function SpawnItem() {
 
 //LOAD MODEL
 loader.load(
-    'models/hat.glb', 
+    '../models/hat.glb', 
     function (gltf) {
         const model = gltf.scene; 
         model.scale.set(0.75, 0.75, 0.75);
