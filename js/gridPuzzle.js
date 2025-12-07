@@ -97,7 +97,7 @@ function GridGame_ButtonClick(value) {
 function CreatePuzzle() {
     let rand1 = Math.floor(Math.random() * 25);
     GridGame_ButtonClick(rand1);
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 10; i++) {
         let rand2 = Math.floor(Math.random() * 25);
         if (states[rand2]) {
             GridGame_ButtonClick(rand2);

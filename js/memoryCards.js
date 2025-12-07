@@ -1,90 +1,39 @@
 "use strict"
-const memoryGameArea = document.querySelector(".memoryCardsArea");
-const cardType0 = `<img src="../img/classes/warricon.jpg"/>`
-const cardType1 = `<img src="../img/classes/mageicon.jpg"/>`
-const cardType2 = `<img src="../img/classes/dkicon.jpg"/>`
-const cardType3 = `<img src="../img/classes/dhicon.jpg"/>`
-const cardType4 = `<img src="../img/classes/druicon.jpg"/>`
-const cardType5 = `<img src="../img/classes/priicon.jpg"/>`
-const cardType6 = `<img src="../img/classes/palaicon.jpg"/>`
-const cardType7 = `<img src="../img/classes/warlicon.jpg"/>`
-const cardType8 = `<img src="../img/classes/rogicon.jpg"/>`
-const cardType9 = `<img src="../img/classes/hunticon.jpg"/>`
-const cardType10 = `<img src="../img/classes/monkicon.jpg"/>`
-const cardType11 = `<img src="../img/classes/shaicon.jpg"/>`
-var selectedCard1, selectedCard2, selectedCard1Index, selectedCard2Index;
-var counter = 0;
-var playable = true;
-var point = 0;
-
-let memoryCards = [];
-
-let ShowFace = function (cardNumber) {
-    switch (memoryCards[cardNumber].classList[1]) {
-    case "cardType0":
-        memoryCards[cardNumber].innerHTML = cardType0;
-        break;
-    case "cardType1":
-        memoryCards[cardNumber].innerHTML = cardType1;
-        break;
-    case "cardType2":
-        memoryCards[cardNumber].innerHTML = cardType2;
-        break;
-    case "cardType3":
-        memoryCards[cardNumber].innerHTML = cardType3;
-        break;
-    case "cardType4":
-        memoryCards[cardNumber].innerHTML = cardType4;
-        break;
-    case "cardType5":
-        memoryCards[cardNumber].innerHTML = cardType5;
-        break;
-    case "cardType6":
-        memoryCards[cardNumber].innerHTML = cardType6;
-        break;
-    case "cardType7":
-        memoryCards[cardNumber].innerHTML = cardType7;
-        break;
-    case "cardType8":
-        memoryCards[cardNumber].innerHTML = cardType8;
-        break;
-    case "cardType9":
-        memoryCards[cardNumber].innerHTML = cardType9;
-        break;
-    case "cardType10":
-        memoryCards[cardNumber].innerHTML = cardType10;
-        break;
-    case "cardType11":
-        memoryCards[cardNumber].innerHTML = cardType11;
-        break;
-    }
-} 
-
-//style background = image so there can be transition duration from css.
 
 function CreateMemoryGame() {
+    const memoryGameArea = document.querySelector(".memoryCardsArea");
+    let selectedCard1, selectedCard2, selectedCard1Index, selectedCard2Index;
+    let phase = 0;
+    let playable = true;
+    let point = 0;
+    let memoryCards = [];
+    let memoryImages = [];
     for (let i = 0; i < 24; i++) {
         const button = document.createElement("button");
         button.className = "memoryCard";
         memoryGameArea.appendChild(button);
+        const img = document.createElement("img");
+        img.classList.add("hidden");
+        button.appendChild(img);
+        memoryImages.push(img);
         memoryCards.push(button);
     }
     memoryCards.forEach(function (value, index) {
         value.addEventListener("click", function () {
             if (playable) {
                 playable = false;
-                ShowFace(index);
-                if (counter == 0) {
+                memoryImages[index].classList.toggle("hidden", false);
+                if (phase == 0) {
                     selectedCard1Index = index;
-                    selectedCard1 = memoryCards[index].className;
+                    selectedCard1 = memoryImages[index].src;
                     memoryCards[selectedCard1Index].disabled = true;
-                    counter++;
+                    phase++;
                     playable = true;
                 }
-                else if (counter == 1) {
-                    counter = 0;
+                else if (phase == 1) {
+                    phase = 0;
                     selectedCard2Index = index;
-                    selectedCard2 = memoryCards[index].className;
+                    selectedCard2 = memoryImages[index].src;
                     if (selectedCard1 == selectedCard2) {
                         memoryCards[selectedCard1Index].style.backgroundColor = "green";
                         memoryCards[selectedCard2Index].style.backgroundColor = "green";
@@ -105,8 +54,8 @@ function CreateMemoryGame() {
                             }
                         }
                         else {
-                            memoryCards[selectedCard1Index].innerHTML = "";
-                            memoryCards[selectedCard2Index].innerHTML = "";
+                            memoryImages[selectedCard1Index].classList.toggle("hidden", true);
+                            memoryImages[selectedCard2Index].classList.toggle("hidden", true);
                             memoryCards[selectedCard1Index].disabled = false;
                             playable = true;
                         }
@@ -115,14 +64,13 @@ function CreateMemoryGame() {
             }
         });
     });
-    let imageArray = new Array;
-    for (var i = 0; i < 24; i++) {
+    let imageArray = [];
+    for (let i = 0; i < 24; i++) {
         imageArray[i] = i % 12;
     }
-    for (var i = 0; i < 24; i++) {
-        var rand = Math.floor(Math.random() * imageArray.length);
-        var currentIndex = imageArray[rand];
-        memoryCards[i].classList.add(`cardType${currentIndex}`)
+    for (let i = 0; i < 24; i++) {
+        const rand = Math.floor(Math.random() * imageArray.length);
+        memoryImages[i].src = `../img/classes/cl${imageArray[rand]}.jpg`;
         imageArray.splice(rand, 1);
     }
 }

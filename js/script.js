@@ -151,11 +151,11 @@ window.addEventListener('DOMContentLoaded', () => {
             }, index * 500);
         });
     }, 100);
+});
 
-    document.addEventListener("mousemove", (event) => {
-        let mousePosX = 1 - (2 * (window.innerWidth - event.clientX) / window.innerWidth);
-        let mousePosY = event.clientY / window.innerHeight;
-        const icon = document.querySelector(".icon");
-        icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
-    });
+document.addEventListener("mousemove", (event) => {
+    let mousePosX = 1 - (2 * (window.innerWidth - event.clientX) / window.innerWidth);
+    let mousePosY = event.clientY / window.innerHeight;
+    const icon = document.querySelector(".icon");
+    icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
 });
