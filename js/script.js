@@ -1,6 +1,6 @@
 "use strict"
 const navButtons = document.querySelectorAll(".nav_button");
-let sections = [];
+const sections = [];
 navButtons.forEach((el, i) => {
     sections[i] = el.id.replace("Button", "");
     el.onclick = () => ShowSection(sections[i]);
@@ -14,24 +14,25 @@ let wordJumbleLoaded = false;
 let minesweeperLoaded = false;
 let gridPuzzleLoaded = false;
 let memoryCardsLoaded = false;
+let portfolioLoaded = false;
 
-function dropDownFunction() {
+function Toggle_JS_Menu() {
     document.getElementById("jsDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("fa-caret-down");
     document.getElementById("arrow").classList.toggle("fa-caret-up");
 }
-function dropDownFunction2() {
+function Close_JS_Menu() {
     document.getElementById("jsDropdown").classList.toggle("show", false);
-    document.getElementById("arrow").classList.add("fa-caret-down");
-    document.getElementById("arrow").classList.remove("fa-caret-up");
+    document.getElementById("arrow").classList.toggle("fa-caret-down", true);
+    document.getElementById("arrow").classList.toggle("fa-caret-up", false);
 }
 
 function ShowSection (section) {
     if (lastSection == section) return;
     if (section == "javaScript") {
+        Toggle_JS_Menu();
         if (inJS) return;
         inJS = true;
-        dropDownFunction();
         section = jsSection;
     }
     if (section != "wordJumble" &&
@@ -41,7 +42,7 @@ function ShowSection (section) {
         section != "minesweeper" &&
         section != "snake3D" &&
         section != "WIP") {
-        dropDownFunction2();
+        Close_JS_Menu();
         inJS = false;
     }
     else {
@@ -56,6 +57,13 @@ function ShowSection (section) {
                 p.classList.add('show');
             }, index * 500);
         });
+    }
+    else if (section == "portfolio") {
+        if (!portfolioLoaded) {
+            portfolioLoaded = true;
+            CreatePortfolioPage();
+        }
+        document.addEventListener('keydown', OnKeyPress);
     }
     else if (section == "wordJumble") {
         if (!wordJumbleLoaded) {
@@ -97,35 +105,44 @@ function ShowSection (section) {
     else if (lastSection == "WIP") {
         StopSnakeGame();
     }
+    else if (lastSection == "portfolio") {
+        document.removeEventListener("keydown", OnKeyPress);
+    }
     lastSection = section;
     document.querySelector("." + lastSection).classList.toggle("hidden", false);
     document.querySelector("#" + lastSection + "Button").classList.toggle("active", true);
 }
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.querySelector('.lightbox-img');
-const closeBtn = document.querySelector('.lightbox .close');
-
-document.querySelectorAll('.portfolio img').forEach(img => {
-    img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.remove('hidden');
+function CreatePortfolioPage () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.lightbox .close');
+    document.querySelectorAll('.portfolio img').forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.remove('hidden');
+        });
     });
-});
-
-closeBtn.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-});
-
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
+    closeBtn.addEventListener('click', () => {
         lightbox.classList.add('hidden');
+    });
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.add('hidden');
+        }
+    });
+}
+
+function OnKeyPress (event) {
+    console.log(event.key);
+    if (event.key == "Escape" && !lightbox.classList.contains("hidden")) {
+       lightbox.classList.add('hidden');
     }
-});
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     const aboutEl = document.querySelector('.aboutme');
-    const paragraphs = aboutEl.querySelectorAll('p');
+    const paragraphs = document.querySelectorAll('.aboutme p');
     aboutEl.classList.add('visible');
     setTimeout(() => {
         paragraphs.forEach((p, index) => {
@@ -134,18 +151,11 @@ window.addEventListener('DOMContentLoaded', () => {
             }, index * 500);
         });
     }, 100);
-});
 
-document.addEventListener('keydown', (event) => {
-    if (lastSection != "portfolio") return;
-    if (event.key == "Escape" && !lightbox.classList.contains("hidden")) {
-       lightbox.classList.add('hidden');
-    }
-});
-
-document.addEventListener("mousemove", (event) => {
-    let mousePosX = 1 - (2 * (window.innerWidth - event.clientX) / window.innerWidth);
-    let mousePosY = event.clientY / window.innerHeight;
-    const icon = document.querySelector(".icon");
-    icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
+    document.addEventListener("mousemove", (event) => {
+        let mousePosX = 1 - (2 * (window.innerWidth - event.clientX) / window.innerWidth);
+        let mousePosY = event.clientY / window.innerHeight;
+        const icon = document.querySelector(".icon");
+        icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
+    });
 });

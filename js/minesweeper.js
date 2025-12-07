@@ -86,7 +86,6 @@ function Minesweeper_Button(value) {
     else {
         mineButtons[value].disabled = true;
         mineButtons[value].classList.add("passive");
-        console.log(mineButtons[value].classList);
         mineButtons[value].style.backgroundColor = "black";
         tempCoords[0] = Math.floor(value / gridSize);
         tempCoords[1] = value % gridSize;

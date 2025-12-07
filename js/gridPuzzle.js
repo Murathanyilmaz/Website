@@ -1,13 +1,9 @@
 const gridfield = document.querySelector(".gridfield");
 const winCountField = document.querySelector(".gridWinCount");
-
 let gridCards = [];
-let phase = 0;
 let states = new Array(25);
-states.fill(true);
 let winCount = Number(localStorage.getItem('winCount')) || 0;
-winCountField.innerHTML = winCount;
-winCountField.style.color = "#F15924";
+
 /*
 states = states.map(() => true);
 states.fill(true);
@@ -15,37 +11,27 @@ const states = new Array(25).fill(false);
 */
 
 function RestartGridPuzzle () {
-    gridCards.forEach(el => {
-        el.style.margin = "2px";
-    });
-    phase = 0;
+    gridfield.style.gap = "3px";
+    gridfield.style.maxWidth = "300px";
     states.fill(true);
     CreatePuzzle();
     UpdateGrid();
-    gridCards.forEach(el => {
-        el.style.margin = "2px";
-    });
 }
 
 function CreateGridPuzzle() {
-    const gridTable = document.createElement("table");
-    gridfield.appendChild(gridTable);
-    for (let i = 0; i < 5; i++) {
-        const tr = document.createElement("tr");
-        gridTable.appendChild(tr);
-        for (let j = 0; j < 5; j++) {
-            const td = document.createElement("td");
-            tr.appendChild(td);
-            const button = document.createElement("button");
-            button.className = "gridCard";
-            td.appendChild(button);
-            gridCards.push(button);
-        }
+    winCountField.innerHTML = winCount;
+    winCountField.style.color = "#F15924";
+    states.fill(true);
+    for (let i = 0; i < 25; i++) {
+        const button = document.createElement("button");
+        button.className = "gridCard";
+        gridfield.appendChild(button);
+        gridCards.push(button);
     }
     gridCards.forEach(function (value, index) {
         value.addEventListener("click", function () {
             if (states[index]) return;
-            GridGame_Button(index);
+            GridGame_ButtonClick(index);
         })
     });
     CreatePuzzle();
@@ -67,8 +53,9 @@ function UpdateGrid() {
         winCount++;
         localStorage.setItem('winCount', winCount);
         winCountField.innerHTML = winCount;
+        gridfield.style.gap = "2.5px";
+        gridfield.style.maxWidth = "250px";
         gridCards.forEach(el => {
-            el.style.margin = "-5px";
             el.style.backgroundColor = "#4a4948";
         });
         setTimeout(() => {
@@ -78,7 +65,7 @@ function UpdateGrid() {
     }
 }
 
-function GridGame_Button(value) {
+function GridGame_ButtonClick(value) {
     states[value] = !states[value];
     if (value % 5 == 0) {
         states[value - 1 + 2] = !states[value - 1 + 2];
@@ -109,13 +96,12 @@ function GridGame_Button(value) {
 
 function CreatePuzzle() {
     let rand1 = Math.floor(Math.random() * 25);
-    GridGame_Button(rand1);
-    while (phase < 10) {
+    GridGame_ButtonClick(rand1);
+    for (let i = 0; i < 2; i++) {
         let rand2 = Math.floor(Math.random() * 25);
-        if (rand2 != rand1 && states[rand2]) {
-            GridGame_Button(rand2);
+        if (states[rand2]) {
+            GridGame_ButtonClick(rand2);
         }
-        phase++;
     }
     UpdateGrid();
 }

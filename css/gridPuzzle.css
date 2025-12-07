@@ -1,16 +1,16 @@
-.gridPuzzle {
-    font-family: 'Morpheus', sans-serif;
-    text-align: center;
-}
-
-.gridPuzzle table {
+.gridfield {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    max-width: 300px;
     margin: auto;
+    transition-duration: 0.5s;
 }
 
 .gridPuzzle button {
-    width: 60px;
-    height: 60px;
-    margin: 2px;
+    width: 100%;
+    line-height: 1;
+    aspect-ratio: 1;
     background-color: #f15924;
     border-radius: 5%;
     transition-duration: 0.5s;
