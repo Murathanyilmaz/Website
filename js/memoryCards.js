@@ -69,7 +69,6 @@ function CreateMemoryGame() {
         memoryGameArea.appendChild(button);
         memoryCards.push(button);
     }
-
     memoryCards.forEach(function (value, index) {
         value.addEventListener("click", function () {
             if (playable) {

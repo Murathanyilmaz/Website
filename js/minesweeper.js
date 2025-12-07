@@ -25,10 +25,6 @@ function CreateMinefield() {
         mineButton.className = "mine";
         minefield.appendChild(mineButton);
         mineButtons.push(mineButton);
-        if (i % gridSize == gridSize - 1) {
-            const br = document.createElement("br");
-            minefield.appendChild(br);
-        }
     }
     mineButtons.forEach(function (value, index) {
         value.addEventListener("click", function () {
@@ -88,6 +84,9 @@ function Minesweeper_Button(value) {
         }, 100);
     }
     else {
+        mineButtons[value].disabled = true;
+        mineButtons[value].classList.add("passive");
+        console.log(mineButtons[value].classList);
         mineButtons[value].style.backgroundColor = "black";
         tempCoords[0] = Math.floor(value / gridSize);
         tempCoords[1] = value % gridSize;
@@ -231,6 +230,8 @@ function CheckAround(row, col) {
             openBoxes[i].style.color = "#f15924";
         }
         openBoxes[i].style.backgroundColor = "black";
+        openBoxes[i].disabled = true;
+        openBoxes[i].classList.add("passive");
     }
     if (coords.length > 0) {
         let temp = coords[0];
