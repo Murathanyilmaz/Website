@@ -192,6 +192,7 @@ fetch("https://nodejs-server-c0m3.onrender.com")
         })
         document.querySelector(".inputArea").classList.remove("hidden");
         serverResponses[0].innerHTML = data.message;
+        console.log("Hi");
     })
     .catch(err => console.error(err));
 
