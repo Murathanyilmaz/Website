@@ -38,4 +38,12 @@
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.memoryCards img.reveal {
+    opacity: 1;
+}
+.memoryCards img.hide {
+    opacity: 0;
 }

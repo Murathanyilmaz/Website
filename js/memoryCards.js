@@ -13,7 +13,6 @@ function CreateMemoryGame() {
         button.className = "memoryCard";
         memoryGameArea.appendChild(button);
         const img = document.createElement("img");
-        img.classList.add("hidden");
         button.appendChild(img);
         memoryImages.push(img);
         memoryCards.push(button);
@@ -22,7 +21,8 @@ function CreateMemoryGame() {
         value.addEventListener("click", function () {
             if (playable) {
                 playable = false;
-                memoryImages[index].classList.toggle("hidden", false);
+                memoryImages[index].classList.remove("hide");
+                memoryImages[index].classList.add("reveal");
                 if (phase == 0) {
                     selectedCard1Index = index;
                     selectedCard1 = memoryImages[index].src;
@@ -54,8 +54,10 @@ function CreateMemoryGame() {
                             }
                         }
                         else {
-                            memoryImages[selectedCard1Index].classList.toggle("hidden", true);
-                            memoryImages[selectedCard2Index].classList.toggle("hidden", true);
+                            memoryImages[selectedCard1Index].classList.remove("reveal");
+                            memoryImages[selectedCard2Index].classList.remove("reveal");
+                            memoryImages[selectedCard1Index].classList.add("hide");
+                            memoryImages[selectedCard2Index].classList.add("hide");
                             memoryCards[selectedCard1Index].disabled = false;
                             playable = true;
                         }
