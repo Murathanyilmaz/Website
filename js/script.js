@@ -196,22 +196,7 @@ fetch("https://nodejs-server-c0m3.onrender.com")
     })
     .catch(err => console.error(err));
 
-//GET-GREET SERVER COMMAND-Murat
-fetch("https://nodejs-server-c0m3.onrender.com/greet?name=Murat")
-    .then(res => res.json())
-    .then(data => {
-        console.log(data.message);
-        serverResponses[1].innerHTML = data.message;
-    });
-
-//GET-GREET SERVER COMMAND-Empty
-fetch("https://nodejs-server-c0m3.onrender.com/greet")
-    .then(res => res.json())
-    .then(data => {
-        console.log(data.message);
-        serverResponses[2].innerHTML = data.message;
-    });
-//POST-ECHO YOUR MESSAGE
+/* POST-ECHO YOUR MESSAGE
 fetch("https://nodejs-server-c0m3.onrender.com/echo", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -224,21 +209,11 @@ fetch("https://nodejs-server-c0m3.onrender.com/echo", {
     })
     .then(res => res.json())
     .then(data => {
-        serverResponses[3].innerHTML = data.youSent;
-        console.log("youSent:" + data.youSent);
-        serverResponses[4].innerHTML = data.youSent.name;
-        serverResponses[5].innerHTML = data.youSent.type;
-        serverResponses[6].innerHTML = data.youSent.author;
-        serverResponses[7].innerHTML = data.youSent.index;
-        serverResponses[8].innerHTML = data.youSent.valuee;
-
         Object.entries(data.youSent).forEach(([key, value], i) => {
-            if (serverResponses[i + 9]) {
-                serverResponses[i + 9].innerHTML = `${key}: ${value}`;
-            }
+            console.log(`${key}: ${value}`);
         });
     });
-
+*/
 function GreetUser (userMessage) {
     userMessage = userMessage.split(" ").join("");
     if (!userMessage) {
