@@ -184,11 +184,10 @@ console.log(serverResponses.length);
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
     .then(res => {
-        res.json();
         serverLoaded = true;
+        return res.json();
     })
     .then(data => {
-        console.log(data.message);
         serverResponses[0].innerHTML = data.message;
     })
     .catch(err => console.error(err));
@@ -214,19 +213,24 @@ fetch("https://nodejs-server-c0m3.onrender.com/echo", {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         name: "murathanyilmaz.net",
+        type: "website",
+        author: "Murathan",
+        index: 0,
         })
     })
     .then(res => res.json())
     .then(data => {
         serverResponses[3].innerHTML = data.youSent;
         console.log("youSent:" + data.youSent);
-        serverResponses[4].innerHTML = data.youDidntSent;
-        console.log("youDidntSent:" + data.youDidntSent);
-        serverResponses[5].innerHTML = data.name;
-        serverResponses[6].innerHTML = data.youSent.name;
-        data.forEach((el, i) => {
-            if (serverResponses[i + 7]) {
-                serverResponses[i + 7].innerHTML = el;
+        serverResponses[4].innerHTML = data.youSent.name;
+        serverResponses[5].innerHTML = data.youSent.type;
+        serverResponses[6].innerHTML = data.youSent.author;
+        serverResponses[7].innerHTML = data.youSent.index;
+        serverResponses[8].innerHTML = data.youSent.valuee;
+
+        Object.entries(data).forEach(([key, value], i) => {
+            if (serverResponses[i + 9]) {
+                serverResponses[i + 9].innerHTML = `${key}: ${value}`;
             }
         });
     });
