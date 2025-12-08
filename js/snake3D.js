@@ -1,5 +1,3 @@
-jsSection = "WIP";
-
 const snake3dScene = new THREE.Scene();
 const snakeContainer = document.querySelector('.threeJS-area-2');
 snake3dScene.background = new THREE.Color(0x505050);

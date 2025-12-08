@@ -192,3 +192,11 @@ footer {
 html {
     scroll-behavior: smooth;
 }
+
+.server-status {
+    color: #fff;
+    font-size: 20pt;
+    margin-left: 40vw;
+    text-align: left;
+    font-family: Nunito, Geneva, Verdana, sans-serif;
+}

@@ -282,7 +282,8 @@ function animateJS() {
         }
     }
     spawnItems.forEach((el, i) => {
-        el.material.color.setHSL(hue + (i / spawnItems.length) , 0.8, 0.4);
+        //el.material.color.setHSL(hue + (i / spawnItems.length) , 0.8, 0.4);
+        el.material.color.setHSL(0.1, 0.8, 0.4);
     })
     //widthSize = window.innerWidth * scaler;
     //heightSize = aspect * widthSize;

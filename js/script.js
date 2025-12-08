@@ -41,7 +41,8 @@ function ShowSection (section) {
         section != "gridPuzzle" &&
         section != "minesweeper" &&
         section != "snake3D" &&
-        section != "WIP") {
+        section != "WIP" &&
+        section != "nodeJS") {
         Close_JS_Menu();
         inJS = false;
     }
@@ -159,10 +160,50 @@ document.addEventListener("mousemove", (event) => {
     icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
 });
 
+let serverLoaded = false;
+let serverStep = 0;
+
+setTimeout(function FetchTest () {
+    if (serverLoaded) return;
+    const serverStatus = document.querySelector(".server-status");
+    let serverText = "Server initializing";
+    for (let i = 0; i < serverStep; i++) {
+        serverText += ".";
+    }
+    serverStatus.innerHTML = serverText;
+    if (serverStep > 2) serverStep = 0;
+    serverStep++;
+    setTimeout(FetchTest, 500);
+}, 1000);
+
+//ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
-  .then(res => res.json())
-  .then(data => {
-    //document.querySelector(".serverTest").innerHTML = data.message;
+    .then(res => {
+    res.json();
+    serverStatus = true;
+    })
+    .then(data => {
     console.log(data.message);
-  })
-  .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
+//GET-GREET SERVER COMMAND-Murat
+fetch("https://nodejs-server-c0m3.onrender.com/greet?name=Murat")
+  .then(res => res.json())
+  .then(data => console.log(data.message));
+//GET-GREET SERVER COMMAND-Empty
+fetch("https://nodejs-server-c0m3.onrender.com/greet")
+  .then(res => res.json())
+  .then(data => console.log(data.message));
+//POST-ECHO YOUR MESSAGE
+fetch("https://nodejs-server-c0m3.onrender.com/echo", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        test: "Hello server!",
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("youSent:" + data.youSent);
+        console.log("youDidntSent:" + data.youDidntSent);
+    });
