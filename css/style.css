@@ -196,7 +196,13 @@ html {
 .server-status {
     color: #fff;
     font-size: 20pt;
-    margin-left: 40vw;
-    text-align: left;
+    text-align: center;
+    font-family: Nunito, Geneva, Verdana, sans-serif;
+}
+
+.server-response {
+    color: #fff;
+    font-size: 16pt;
+    text-align: center;
     font-family: Nunito, Geneva, Verdana, sans-serif;
 }

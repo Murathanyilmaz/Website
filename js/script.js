@@ -164,46 +164,69 @@ let serverLoaded = false;
 let serverStep = 0;
 
 setTimeout(function FetchTest () {
-    if (serverLoaded) return;
     const serverStatus = document.querySelector(".server-status");
+    if (serverLoaded) {
+        serverStatus.innerHTML = "Server: Online 🟢";
+        return;
+    }
     let serverText = "Server initializing";
     for (let i = 0; i < serverStep; i++) {
         serverText += ".";
     }
     serverStatus.innerHTML = serverText;
-    if (serverStep > 2) serverStep = 0;
     serverStep++;
+    if (serverStep > 3) serverStep = 0;
     setTimeout(FetchTest, 500);
 }, 1000);
 
+const serverResponses = document.querySelectorAll(".server-response");
+console.log(serverResponses.length);
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
     .then(res => {
-    res.json();
-    serverLoaded = true;
+        res.json();
+        serverLoaded = true;
     })
     .then(data => {
-    console.log(data.message);
+        console.log(data.message);
+        serverResponses[0].innerHTML = data.message;
     })
     .catch(err => console.error(err));
+
 //GET-GREET SERVER COMMAND-Murat
 fetch("https://nodejs-server-c0m3.onrender.com/greet?name=Murat")
-  .then(res => res.json())
-  .then(data => console.log(data.message));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.message);
+        serverResponses[1].innerHTML = data.message;
+    });
+
 //GET-GREET SERVER COMMAND-Empty
 fetch("https://nodejs-server-c0m3.onrender.com/greet")
-  .then(res => res.json())
-  .then(data => console.log(data.message));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.message);
+        serverResponses[2].innerHTML = data.message;
+    });
 //POST-ECHO YOUR MESSAGE
 fetch("https://nodejs-server-c0m3.onrender.com/echo", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-        test: "Hello server!",
+        name: "murathanyilmaz.net",
         })
     })
     .then(res => res.json())
     .then(data => {
+        serverResponses[3].innerHTML = data.youSent;
         console.log("youSent:" + data.youSent);
+        serverResponses[4].innerHTML = data.youDidntSent;
         console.log("youDidntSent:" + data.youDidntSent);
+        serverResponses[5].innerHTML = data.name;
+        serverResponses[6].innerHTML = data.youSent.name;
+        data.forEach((el, i) => {
+            if (serverResponses[i + 7]) {
+                serverResponses[i + 7].innerHTML = el;
+            }
+        });
     });
