@@ -158,3 +158,10 @@ document.addEventListener("mousemove", (event) => {
     const icon = document.querySelector(".icon");
     icon.style.transform = `rotateX(${mousePosY * 60}deg) rotateY(${-mousePosX * 70}deg)`;
 });
+
+fetch("https://nodejs-server-c0m3.onrender.com")
+  .then(res => res.json())
+  .then(data => {
+    document.querySelector(".serverTest").innerHTML += `<p>${data.message}</p>`;
+  })
+  .catch(err => console.error(err));
