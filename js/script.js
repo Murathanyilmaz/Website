@@ -162,6 +162,7 @@ document.addEventListener("mousemove", (event) => {
 fetch("https://nodejs-server-c0m3.onrender.com")
   .then(res => res.json())
   .then(data => {
-    document.querySelector(".serverTest").innerHTML += `<p>${data.message}</p>`;
+    document.querySelector(".serverTest").innerHTML = data.message;
+    console.log(data.message);
   })
   .catch(err => console.error(err));
