@@ -206,3 +206,29 @@ html {
     text-align: center;
     font-family: Nunito, Geneva, Verdana, sans-serif;
 }
+
+.userInputArea {
+    text-align: center;
+    font-family: 'Nunito', Geneva, Verdana, sans-serif;
+    padding-top: 2px;
+    color: white;
+}
+.label {
+    color: #f15924;
+    font-size: 16pt;
+    text-align: center;
+    font-family: Nunito, Geneva, Verdana, sans-serif;
+}
+input, textarea {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    align-items: center;
+    width: 10%; /* makes it responsive */
+  }
+
+input:focus, textarea:focus {
+    border-color: #f15924;
+    outline: none;
+}

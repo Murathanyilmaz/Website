@@ -180,14 +180,17 @@ setTimeout(function FetchTest () {
 }, 1000);
 
 const serverResponses = document.querySelectorAll(".server-response");
-console.log(serverResponses.length);
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
     .then(res => {
-        serverLoaded = true;
         return res.json();
     })
     .then(data => {
+        serverLoaded = true;
+        serverResponses.forEach(el => {
+            el.classList.remove("hidden");
+        })
+        document.querySelector(".inputArea").classList.remove("hidden");
         serverResponses[0].innerHTML = data.message;
     })
     .catch(err => console.error(err));
@@ -228,9 +231,24 @@ fetch("https://nodejs-server-c0m3.onrender.com/echo", {
         serverResponses[7].innerHTML = data.youSent.index;
         serverResponses[8].innerHTML = data.youSent.valuee;
 
-        Object.entries(data).forEach(([key, value], i) => {
+        Object.entries(data.youSent).forEach(([key, value], i) => {
             if (serverResponses[i + 9]) {
                 serverResponses[i + 9].innerHTML = `${key}: ${value}`;
             }
         });
     });
+
+function GreetUser (userMessage) {
+    userMessage = userMessage.split(" ").join("");
+    if (!userMessage) {
+        alert("Enter text");
+    }
+    else {
+        fetch("https://nodejs-server-c0m3.onrender.com/greet?name=" + userMessage)
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+        });
+    }
+    
+}
