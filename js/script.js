@@ -49,7 +49,6 @@ function ShowSection (section) {
         jsSection = section;
     }
     if (section == "aboutme") {
-        document.querySelector('.aboutme').classList.add('visible');
         const paragraphs = document.querySelector('.aboutme').querySelectorAll('p');
         paragraphs.forEach((p, index) => {
             p.classList.remove('show');
