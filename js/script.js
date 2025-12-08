@@ -180,7 +180,7 @@ setTimeout(function FetchTest () {
 fetch("https://nodejs-server-c0m3.onrender.com")
     .then(res => {
     res.json();
-    serverStatus = true;
+    serverLoaded = true;
     })
     .then(data => {
     console.log(data.message);
