@@ -22,8 +22,12 @@ const messageButton = document.getElementById("messageButton");
 messageButton.onclick = PostMessage;
 
 async function PostMessage() {
-    const text = document.getElementById("userMessage").value;
-
+    let text = document.getElementById("userMessage").value;
+    text = text.split(" ").join("");
+    if (!text) {
+        alert("Enter text");
+        return;
+    }
     await fetch("https://nodejs-server-c0m3.onrender.com/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,22 +44,6 @@ async function GetMessage() {
 
     document.getElementById("msgList").innerHTML = data.map(m => `<li>${m.text}</li>`).join("");
 }
-
-
-app.post("/message", async (req, res) => {
-    try {
-        const msg = await Message.create({ text: req.body.text });
-        res.json({ success: true, message: msg });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-app.get("/messages", async (req, res) => {
-    const messages = await Message.find().sort({ createdAt: -1 });
-    res.json(messages);
-});
-
 
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
