@@ -179,7 +179,6 @@ setTimeout(function FetchTest () {
     setTimeout(FetchTest, 500);
 }, 1000);
 
-const serverResponses = document.querySelectorAll(".server-response");
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
     .then(res => {
@@ -187,11 +186,7 @@ fetch("https://nodejs-server-c0m3.onrender.com")
     })
     .then(data => {
         serverLoaded = true;
-        serverResponses.forEach(el => {
-            el.classList.remove("hidden");
-        })
         document.querySelector(".inputArea").classList.remove("hidden");
-        serverResponses[0].innerHTML = data.message;
         console.log("Hi");
     })
     .catch(err => console.error(err));
