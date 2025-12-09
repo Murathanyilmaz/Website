@@ -67,13 +67,14 @@
             </div>
             <div class="server-status">Server initializing</div>
             <br>
-            <div class="description inputArea hidden">
+            <div class="description inputArea">
                 <label class="label" for="userInput">Greet yourself: </label>
-                <input type="text" id="userInput" name="userInput" placeholder="Enter text here">
+                <input type="textarea" id="userMessage" name="userMessage" placeholder="Enter your message">
                 <br>
-                <button style="width: 120px;height: 30px;margin-top: 15px;" onclick="GreetUser(document.querySelector(`#userInput`).value)">Send to Server</button>
+                <button id="messageButton" style="width: 120px;height: 30px;margin-top: 15px;">Send Message</button>
+                <h2>Messages:</h2>
+                <ul id="msgList"></ul>
             </div>
-            
         </div>
         <div class="snake3D hidden">
             <div class="description threeJS-desc"><h4>Use mouse to move!</h4></div>
@@ -389,6 +390,7 @@
     <script src="../js/gridPuzzle.js"></script>
     <script src="../js/minesweeper.js"></script>
     <script src="../js/threeJS.js"></script>
-    <script src="js/snake3D.js"></script>
+    <script src="../js/snake3D.js"></script>
+    <script src="../js/database.js"></script>
 </body>
 </html>
