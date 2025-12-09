@@ -35,15 +35,16 @@ async function PostMessage() {
     });
 
     document.getElementById("userMessage").value = "";
-    await GetMessage();
+    await GetMessages();
 }
 
-async function GetMessage() {
+async function GetMessages() {
     const res = await fetch("https://nodejs-server-c0m3.onrender.com/messages");
     const data = await res.json();
-
-    document.getElementById("msgList").innerHTML = data.map(m => `<li>${m.text}</li>`).join("");
+    if (data.length > 0) document.getElementById("msgList").innerHTML = data.map(m => `<li>${m.text}</li>`).join("");
+    else alert("No messages found!");
 }
+GetMessages();
 
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
@@ -53,7 +54,6 @@ fetch("https://nodejs-server-c0m3.onrender.com")
     .then(data => {
         serverLoaded = true;
         document.querySelector(".inputArea").classList.remove("hidden");
-        console.log("Hi");
     })
     .catch(err => console.error(err));
 

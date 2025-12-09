@@ -118,36 +118,34 @@ function SnakeAnimation (currentTime) {
     }
     snakeRenderer.render(snake3dScene, snakeCam);
 }
-SnakeAnimation(0);
-SpawnBait();
-
-document.addEventListener('keydown', (event) => {
-    const keysToPreventScroll = [
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-        " "
-    ];
-    if (keysToPreventScroll.includes(event.key)) {
-        event.preventDefault(); 
-    }
-    if (event.key == "ArrowUp" || event.key == "W" || event.key == "w") {
-        direction = 0;
-    }
-    else if (event.key == "ArrowRight" || event.key == "D" || event.key == "d") {
-        direction = 1;
-    }
-    else if (event.key == "ArrowDown" || event.key == "S" || event.key == "s") {
-        direction = 2;
-    }
-    else if (event.key == "ArrowLeft" || event.key == "A" || event.key == "a") {
-        direction = 3;
-    }
-});
+//SnakeAnimation(0);
+//SpawnBait();
 
 function StartSnakeGame () {
-    
+    document.addEventListener('keydown', (event) => {
+        const keysToPreventScroll = [
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            " "
+        ];
+        if (keysToPreventScroll.includes(event.key)) {
+            event.preventDefault(); 
+        }
+        if (event.key == "ArrowUp" || event.key == "W" || event.key == "w") {
+            direction = 0;
+        }
+        else if (event.key == "ArrowRight" || event.key == "D" || event.key == "d") {
+            direction = 1;
+        }
+        else if (event.key == "ArrowDown" || event.key == "S" || event.key == "s") {
+            direction = 2;
+        }
+        else if (event.key == "ArrowLeft" || event.key == "A" || event.key == "a") {
+            direction = 3;
+        }
+    });
 }
 StartSnakeGame();
 
