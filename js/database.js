@@ -42,7 +42,6 @@ async function GetMessages() {
     const res = await fetch("https://nodejs-server-c0m3.onrender.com/messages");
     const data = await res.json();
     if (data.length > 0) {
-        console.log(data);
         //const messages = data.map(m => `<span class="messagesList">${m.text}</span>`).join("");
         Object.entries(data).forEach(([key, value], i) => {
             if (messageCount > key) return;
@@ -57,7 +56,6 @@ async function GetMessages() {
             const s = String(date.getSeconds()).padStart(2,'0');
 
             const formatted = `${Y}-${M}-${D} ${h}:${m}:${s}`;
-            console.log(formatted);
             msgDiv.innerHTML = formatted + ":&nbsp;&nbsp;&nbsp;&nbsp;" + value.text;
             msgDiv.classList.add("messageItem");
             document.querySelector(".messagesArea").appendChild(msgDiv);
