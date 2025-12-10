@@ -89,6 +89,9 @@ function ShowSection (section) {
             CreateMemoryGame();
         }
     }
+    else if (section == "nodeJS") {
+        document.addEventListener('keydown', OnEnterPress);
+    }
     else if (section == "snake3D") {
         Start3D_Scene();
     }
@@ -106,7 +109,10 @@ function ShowSection (section) {
         StopSnakeGame();
     }
     else if (lastSection == "portfolio") {
-        document.removeEventListener("keydown", OnKeyPress);
+        document.removeEventListener('keydown', OnKeyPress);
+    }
+    else if (lastSection == "nodeJS") {
+        document.removeEventListener('keydown', OnEnterPress)
     }
     lastSection = section;
     document.querySelector("." + lastSection).classList.toggle("hidden", false);
@@ -134,7 +140,6 @@ function CreatePortfolioPage () {
 }
 
 function OnKeyPress (event) {
-    console.log(event.key);
     if (event.key == "Escape" && !lightbox.classList.contains("hidden")) {
        lightbox.classList.add('hidden');
     }

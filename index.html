@@ -11,6 +11,7 @@
     <link href="css/memoryCards.css" rel="stylesheet" />
     <link href="css/gridPuzzle.css" rel="stylesheet" />
     <link href="css/minesweeper.css" rel="stylesheet" />
+    <link href="css/nodeJS.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="icon" href="img/icons/favicon.png">
@@ -59,7 +60,7 @@
         </nav>
     </header>
     <main class="content">
-        <div class="nodeJS hidden">
+        <div class="nodeJS">
             <div class="description">
                 <h3>
                     <font color="#f15924">NodeJS + Express</font> Backend Server
@@ -67,12 +68,12 @@
             </div>
             <div class="server-status">Server initializing</div>
             <br>
-            <div class="description inputArea hidden">
-                <div class="messagesArea"><h2 style="text-align: center;color: #000;">Messages</h2></div>
-                <label class="label" for="userInput">Send message: </label>
-                <textarea id="userMessage" name="userMessage" placeholder="Enter your message" rows="5" cols="40"></textarea>
-                <button id="messageButton" style="width: 120px;height: 30px;margin-top: 15px;">Send Message</button>
-                
+            <div class="inputArea">
+                <div class="newMsgArea hidden">
+                    <textarea class="msgBox" placeholder="Type your message..." rows="3" cols="40" resize="false"></textarea>
+                    <button class="msgBtn">Send Message</button>
+                </div>
+                <div class="oldMsgArea"></div>
             </div>
         </div>
         <div class="snake3D hidden">
