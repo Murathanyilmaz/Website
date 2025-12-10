@@ -235,10 +235,14 @@ input:focus, textarea:focus {
 
 .messagesArea {
     text-align: left;
-    background-color: #ccc;
+    background-color: #ddd;
     width: 50vw;
     margin: auto;
-    box-shadow: 5px 5px 20px #000;
+    border: none;
+    border-radius: 10px;
+    box-shadow:
+        inset 5px 5px 15px rgba(0,0,0,0.4),
+        inset -5px -5px 15px rgba(255,255,255,0.6);
 }
 
 .messageItem {

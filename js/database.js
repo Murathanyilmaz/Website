@@ -66,6 +66,9 @@ async function GetMessages() {
     }
 }
 GetMessages();
+setInterval(() => {
+    GetMessages();
+}, 1000);
 
 //ROOT SERVER COMMAND
 fetch("https://nodejs-server-c0m3.onrender.com")
