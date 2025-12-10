@@ -1,7 +1,7 @@
 const serverStatus = document.querySelector(".server-status");
 const inputArea = document.querySelector(".inputArea");
 const messagesArea = document.querySelector(".oldMsgArea");
-const newMessageArea = document.querySelector(".newMsgArea");
+const messageButton = document.querySelector(".msgBtn");
 
 let serverLoaded = false;
 let serverStep = 0;
@@ -9,13 +9,14 @@ let animationTimeout;
 const SOCKET_SERVER_URL = "https://nodejs-server-c0m3.onrender.com";
 const socket = io(SOCKET_SERVER_URL);
 
+messageButton.onclick = PostMessage;
+
 AnimateLoading();
 socket.on("connect", () => {
     serverLoaded = true;
     clearTimeout(animationTimeout);
     serverStatus.innerHTML = "Server: Online 🟢";
     inputArea.classList.remove("hidden");
-    newMessageArea.classList.remove("hidden");
     GetHistoricalMessages();
 });
 socket.on("disconnect", () => {
@@ -36,6 +37,13 @@ socket.on("connect_error", (err) => {
 socket.on("message", (savedMessage) => {
     DisplayMessages(savedMessage); 
 });
+socket.on("message-deleted", (messageId) => {
+    const messageElement = document.getElementById(`msg-${messageId}`);
+    if (messageElement) {
+        messageElement.remove(); 
+        console.log(`Removed message from DOM: ${messageId}`);
+    }
+});
 
 function AnimateLoading () {
     if (serverLoaded) {
@@ -52,8 +60,12 @@ function AnimateLoading () {
     animationTimeout = setTimeout(AnimateLoading, 500);
 }
 
-const messageButton = document.querySelector(".msgBtn");
-messageButton.onclick = PostMessage;
+
+function DeleteMessage(messageId) {
+    if (confirm("Are you sure you want to delete this message?")) {
+        socket.emit("delete-message", messageId);
+    }
+}
 
 async function PostMessage() {
     let text = document.querySelector(".msgBox").value;
@@ -75,10 +87,18 @@ function DisplayMessages(messageData) {
     const h = String(date.getHours()).padStart(2,'0');
     const m = String(date.getMinutes()).padStart(2,'0');
     //const s = String(date.getSeconds()).padStart(2,'0');
-    
+
     const formatted = `${D}.${M}.${Y} ${h}:${m}`;
-    msgDiv.innerHTML = "<span class='deleteMsg'>&times;</span>";
-    msgDiv.innerHTML += formatted + "&nbsp;&nbsp;&nbsp;" + messageData.text;
+    
+    const deleteButton = document.createElement("span");
+    deleteButton.innerHTML = "&times;";
+    deleteButton.onclick = () => DeleteMessage(messageData._id); 
+    deleteButton.classList.add("deleteMsg");
+
+    msgDiv.innerHTML = formatted + "&nbsp;&nbsp;&nbsp;" + messageData.text;
+    msgDiv.prepend(deleteButton); 
+    
+    msgDiv.id = `msg-${messageData._id}`;
     msgDiv.classList.add("msgItem");
     messagesArea.prepend(msgDiv);
 }
@@ -109,7 +129,8 @@ fetch("https://nodejs-server-c0m3.onrender.com")
 
 function OnEnterPress (event) {
     if (event.key == "Enter") {
-       PostMessage();
+        event.preventDefault();
+        PostMessage();
     }
 }
 

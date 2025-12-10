@@ -66,7 +66,7 @@ function CheckWin() {
             mineButtonsGrid[div][mod].style.backgroundColor = "green";
         }
         setTimeout(() => {
-            alert("Congratulations, you won! 🎉 Tap to restart!");
+            confirm("Congratulations, you won! 🎉 Tap to restart!");
             RestartMinesweeper();
         }, 100);
     }
