@@ -23,8 +23,7 @@ messageButton.onclick = PostMessage;
 
 async function PostMessage() {
     let text = document.getElementById("userMessage").value;
-    text = text.split(" ").join("");
-    if (!text) {
+    if (!text.replace(/\s+/g, '').length) {
         alert("Enter text");
         return;
     }
@@ -37,12 +36,34 @@ async function PostMessage() {
     document.getElementById("userMessage").value = "";
     await GetMessages();
 }
+let messageCount = 0;
 
 async function GetMessages() {
     const res = await fetch("https://nodejs-server-c0m3.onrender.com/messages");
     const data = await res.json();
-    if (data.length > 0) document.getElementById("msgList").innerHTML = data.map(m => `<li>${m.text}</li>`).join("");
-    else alert("No messages found!");
+    if (data.length > 0) {
+        console.log(data);
+        //const messages = data.map(m => `<span class="messagesList">${m.text}</span>`).join("");
+        Object.entries(data).forEach(([key, value], i) => {
+            if (messageCount > key) return;
+            const msgDiv = document.createElement("div");
+            let msgTime = value.createdAt;
+            const date = new Date(msgTime);
+            const Y = date.getFullYear();
+            const M = String(date.getMonth() + 1).padStart(2,'0');
+            const D = String(date.getDate()).padStart(2,'0');
+            const h = String(date.getHours()).padStart(2,'0');
+            const m = String(date.getMinutes()).padStart(2,'0');
+            const s = String(date.getSeconds()).padStart(2,'0');
+
+            const formatted = `${Y}-${M}-${D} ${h}:${m}:${s}`;
+            console.log(formatted);
+            msgDiv.innerHTML = formatted + ":&nbsp;&nbsp;&nbsp;&nbsp;" + value.text;
+            msgDiv.classList.add("messageItem");
+            document.querySelector(".messagesArea").appendChild(msgDiv);
+            messageCount++;
+        });
+    }
 }
 GetMessages();
 

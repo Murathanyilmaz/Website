@@ -31,7 +31,7 @@ const floorTexture = textureLoader.load('../img/icons/gmail.png',
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(20, 30);
         floor.material = floorMat;
-        console.log('Floor texture loaded successfully!');
+        //console.log('Floor texture loaded successfully!');
     },
     undefined,
     function (err) {
@@ -227,7 +227,7 @@ loader.load(
         });
     },
     function (xhr) {
-        console.log((Math.floor(xhr.loaded / xhr.total) * 100) + '% loaded');
+        //console.log((Math.floor(xhr.loaded / xhr.total) * 100) + '% loaded');
     },
     function (error) {
         console.error('An error happened', error);

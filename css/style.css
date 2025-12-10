@@ -232,3 +232,18 @@ input:focus, textarea:focus {
     border-color: #f15924;
     outline: none;
 }
+
+.messagesArea {
+    text-align: left;
+    background-color: #ccc;
+    width: 50vw;
+    margin: auto;
+    box-shadow: 5px 5px 20px #000;
+}
+
+.messageItem {
+    margin: 10px 15px;
+    color: #000;
+    font-size: 20pt !important;
+    font-family: monospace; 
+}
