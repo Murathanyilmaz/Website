@@ -13,6 +13,7 @@ function CreateMemoryGame() {
         button.className = "memoryCard";
         memoryGameArea.appendChild(button);
         const img = document.createElement("img");
+        img.setAttribute("draggable", false);
         button.appendChild(img);
         memoryImages.push(img);
         memoryCards.push(button);
@@ -73,6 +74,7 @@ function CreateMemoryGame() {
     for (let i = 0; i < 24; i++) {
         const rand = Math.floor(Math.random() * imageArray.length);
         memoryImages[i].src = `../img/classes/cl${imageArray[rand]}.jpg`;
+        memoryImages[i].ondragstart = "return false"
         imageArray.splice(rand, 1);
     }
 }
