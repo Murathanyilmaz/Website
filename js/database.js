@@ -96,7 +96,7 @@ function DisplayMessages(messageData) {
     deleteButton.classList.add("deleteMsg");
 
     msgDiv.innerHTML = formatted + "&nbsp;&nbsp;&nbsp;" + messageData.text;
-    //msgDiv.prepend(deleteButton); 
+    msgDiv.prepend(deleteButton); 
     
     msgDiv.id = `msg-${messageData._id}`;
     msgDiv.classList.add("msgItem");
